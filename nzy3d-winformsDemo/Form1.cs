@@ -54,6 +54,8 @@ namespace nzy3d_winformsDemo
             // Create the chart and embed the surface within
             Chart chart = new Chart(myRenderer3D, Quality.Nicest);
             chart.Scene.Graph.Add(surface);
+
+
             axeLayout = chart.AxeLayout;
             
             // All activated by default
