@@ -74,7 +74,7 @@ namespace nzy3d_wpfDemo
 
             // Build a nice surface to display with cool alpha colors 
             // (alpha 0.8 for surface color and 0.5 for wireframe)
-            Shape surface = Builder.buildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
+            Shape surface = Builder.BuildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
             surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.8));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = true;

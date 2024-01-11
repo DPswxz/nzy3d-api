@@ -38,7 +38,7 @@ namespace nzy3d_winformsDemo
 
             // Build a nice surface to display with cool alpha colors 
             // (alpha 0.8 for surface color and 0.5 for wireframe)
-            Shape surface = Builder.buildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
+            Shape surface = Builder.BuildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
             surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.8));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = true;
@@ -94,7 +94,7 @@ namespace nzy3d_winformsDemo
             chart.AxeLayout.ZAxeLabel = "Rate (%)";
 
             // Create surface
-            var surface = Builder.buildDelaunay(coords);
+            var surface = Builder.BuildDelaunay(coords);
             surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin * 1.05, surface.Bounds.ZMax * 0.95, new Color(1, 1, 1, 0.9));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = false;
@@ -137,12 +137,10 @@ namespace nzy3d_winformsDemo
                 }
             }
 
-
-
             // Create the chart
-            Chart chart = new Chart(renderer3D, Quality.Fastest);
+            Chart chart = new Chart(renderer3D, Quality.Intermediate);
             chart.View.Maximized = false;
-            chart.View.CameraMode = CameraMode.ORTHOGONAL;
+            //chart.View.CameraMode = CameraMode.ORTHOGONAL;
             //chart.AxeLayout.YTickRenderer = new DateTickRenderer("dd/MM/yyyy");
             chart.AxeLayout.YAxeLabel = "Time";
             //chart.AxeLayout.XTickRenderer = labels;
@@ -150,7 +148,7 @@ namespace nzy3d_winformsDemo
             chart.AxeLayout.ZAxeLabel = "Absorbance";
 
             // Create surface
-            Shape surface = Builder.buildDelaunay(coords);
+            Shape surface = Builder.BuildDelaunay(coords);
             surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin * 1.05, surface.Bounds.ZMax * 0.95, new Color(1, 1, 1, 0.9));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = false;
@@ -186,7 +184,7 @@ namespace nzy3d_winformsDemo
             chart.View.CameraMode = CameraMode.PERSPECTIVE;
 
             // Create surface
-            var surface = Builder.buildDelaunay(coords);
+            var surface = Builder.BuildDelaunay(coords);
             surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.8));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = true;

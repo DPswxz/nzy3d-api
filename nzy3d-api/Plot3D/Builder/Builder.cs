@@ -24,7 +24,7 @@ namespace nzy3D.Plot3D.Builder
 		static internal bool _wireframeDisplayed = false;
 
 		static internal Color _wireframeColor = Color.BLACK;
-		public static Shape buildOrthonomal(OrthonormalGrid grid, Mapper mapper)
+		public static Shape BuildOrthonomal(OrthonormalGrid grid, Mapper mapper)
 		{
 			OrthonormalTessellator tesselator = new OrthonormalTessellator();
 			return (Shape)tesselator.build(grid.Apply(mapper));
@@ -42,7 +42,7 @@ namespace nzy3D.Plot3D.Builder
 			return (Shape)tesselator.build(grid.Apply(mapper));
 		}
 
-		public static Shape buildDelaunay(List<Coord3d> coordinates)
+		public static Shape BuildDelaunay(List<Coord3d> coordinates)
 		{
 			DelaunayTessellator tesselator = new DelaunayTessellator();
 			return (Shape)tesselator.build(coordinates);

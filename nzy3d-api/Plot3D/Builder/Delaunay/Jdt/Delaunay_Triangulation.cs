@@ -138,7 +138,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 			do {
 				Flip(tt, _modCount);
 				tt = tt.canext;
-			} while (tt.Equals(t) & !tt.isHalfplane);
+			} while (tt.Equals(t) & !tt.IsHalfplane);
 			if ((gridIndex != null)) {
 				gridIndex.updateIndex(getLastUpdatedTriangles());
 			}
@@ -171,7 +171,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 			nPoints += 1;
 			if ((!allColinear)) {
 				Triangle_dt t = Find(startTriangle, p);
-				if (t.isHalfplane) {
+				if (t.IsHalfplane) {
 					startTriangle = extendOutside(t, p);
 				} else {
 					startTriangle = extendInside(t, p);
@@ -334,11 +334,11 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 
 		private Triangle_dt treatDegeneracyInside(Triangle_dt t, Point_dt p)
 		{
-			if ((t.abnext.isHalfplane & p.pointLineTest(t.b, t.a) == Point_dt.ONSEGMENT))
+			if ((t.abnext.IsHalfplane & p.pointLineTest(t.b, t.a) == Point_dt.ONSEGMENT))
 				return extendOutside(t.abnext, p);
-			if ((t.bcnext.isHalfplane & p.pointLineTest(t.c, t.b) == Point_dt.ONSEGMENT))
+			if ((t.bcnext.IsHalfplane & p.pointLineTest(t.c, t.b) == Point_dt.ONSEGMENT))
 				return extendOutside(t.bcnext, p);
-			if ((t.canext.isHalfplane & p.pointLineTest(t.a, t.c) == Point_dt.ONSEGMENT))
+			if ((t.canext.IsHalfplane & p.pointLineTest(t.a, t.c) == Point_dt.ONSEGMENT))
 				return extendOutside(t.canext, p);
 			return null;
 		}
@@ -371,7 +371,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 
 		private Triangle_dt extendcounterclock(Triangle_dt t, Point_dt p)
 		{
-			t.isHalfplane = false;
+			t.IsHalfplane = false;
 			t.c = p;
 			t.circumcircle();
 			Triangle_dt tca = t.canext;
@@ -388,7 +388,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 
 		private Triangle_dt extendclock(Triangle_dt t, Point_dt p)
 		{
-			t.isHalfplane = false;
+			t.IsHalfplane = false;
 			t.c = p;
 			t.circumcircle();
 			Triangle_dt tbc = t.bcnext;
@@ -408,7 +408,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 			Triangle_dt u = t.abnext;
 			Triangle_dt v = default(Triangle_dt);
 			t.mc = mc;
-			if ((u.isHalfplane | (!(u.circumcircle_contains(t.c)))))
+			if ((u.IsHalfplane | (!(u.CircumcircleContains(t.c)))))
 				return;
 			if ((t.a.Equals(u.a))) {
 				v = new Triangle_dt(u.b, t.b, t.c);
@@ -483,9 +483,9 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 			if (p == null)
 				return null;
 			Triangle_dt next_t = default(Triangle_dt);
-			if ((curr.isHalfplane)) {
+			if ((curr.IsHalfplane)) {
 				next_t = findnext2(p, curr);
-				if ((next_t == null | next_t.isHalfplane))
+				if ((next_t == null | next_t.IsHalfplane))
 					return curr;
 				curr = next_t;
 			}
@@ -493,7 +493,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 				next_t = findnext1(p, curr);
 				if ((next_t == null))
 					return curr;
-				if ((next_t.isHalfplane))
+				if ((next_t.IsHalfplane))
 					return next_t;
 				curr = next_t;
 			}
@@ -506,11 +506,11 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		private static Triangle_dt findnext1(Point_dt p, Triangle_dt v)
 		{
-			if ((p.pointLineTest(v.a, v.b) == Point_dt.RIGHT & (!(v.abnext.isHalfplane))))
+			if ((p.pointLineTest(v.a, v.b) == Point_dt.RIGHT & (!(v.abnext.IsHalfplane))))
 				return v.abnext;
-			if ((p.pointLineTest(v.b, v.c) == Point_dt.RIGHT & (!(v.bcnext.isHalfplane))))
+			if ((p.pointLineTest(v.b, v.c) == Point_dt.RIGHT & (!(v.bcnext.IsHalfplane))))
 				return v.bcnext;
-			if ((p.pointLineTest(v.c, v.a) == Point_dt.RIGHT & (!(v.canext.isHalfplane))))
+			if ((p.pointLineTest(v.c, v.a) == Point_dt.RIGHT & (!(v.canext.IsHalfplane))))
 				return v.canext;
 			if ((p.pointLineTest(v.a, v.b) == Point_dt.RIGHT))
 				return v.abnext;
@@ -526,11 +526,11 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		private static Triangle_dt findnext2(Point_dt p, Triangle_dt v)
 		{
-			if ((((v.abnext != null)) & (!(v.abnext.isHalfplane))))
+			if ((((v.abnext != null)) & (!(v.abnext.IsHalfplane))))
 				return v.abnext;
-			if ((((v.bcnext != null)) & (!(v.bcnext.isHalfplane))))
+			if ((((v.bcnext != null)) & (!(v.bcnext.IsHalfplane))))
 				return v.bcnext;
-			if ((((v.canext != null)) & (!(v.canext.isHalfplane))))
+			if ((((v.canext != null)) & (!(v.canext.IsHalfplane))))
 				return v.canext;
 			return null;
 		}
@@ -543,7 +543,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 		public bool contains(Point_dt p)
 		{
 			Triangle_dt tt = Find(p);
-			return !tt.isHalfplane;
+			return !tt.IsHalfplane;
 		}
 
 		/// <summary>
@@ -555,7 +555,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 		public bool contains(double x, double y)
 		{
 			Triangle_dt tt = Find(new Point_dt(x, y));
-			return !tt.isHalfplane;
+			return !tt.IsHalfplane;
 		}
 
 		/// <summary>

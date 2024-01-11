@@ -1,31 +1,19 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 namespace nzy3D.Colors.ColorMaps
 {
-	/// <summary>
-	/// Creates a new instance of ColorMapGrayscale. 
-	///  A ColorMapWhiteRed objects provides a color for points standing
-	///  between a Zmin and Zmax values.
-	/// 
-	/// The points standing outside these [Zmin;Zmax] boundaries are assigned
-	///  to the same color than the points standing on the boundaries.
-	/// 
-	/// The grayscale colormap is a progressive transition from black to white.
-	/// </summary>
-	public class ColorMapGrayscale : IColorMap
+    /// <summary>
+    /// Creates a new instance of ColorMapGrayscale. 
+    ///  A ColorMapWhiteRed objects provides a color for points standing
+    ///  between a Zmin and Zmax values.
+    /// 
+    /// The points standing outside these [Zmin;Zmax] boundaries are assigned
+    ///  to the same color than the points standing on the boundaries.
+    /// 
+    /// The grayscale colormap is a progressive transition from black to white.
+    /// </summary>
+    public class ColorMapGrayscale : IColorMap
 	{
-
-
-		private bool m_direction;
-		public bool Direction {
-			get { return m_direction; }
-			set { m_direction = value; }
-		}
+		/// <inheritdoc/>
+		public bool Direction { get; set; } = true;
 
 		public Color GetColor(IColorMappable colorable, double v)
 		{
@@ -42,15 +30,23 @@ namespace nzy3D.Colors.ColorMaps
 		/// </summary>
 		private Color GetColor(double x, double y, double z, double zMin, double zMax)
 		{
-			double rel_value = 0;
-			if (z < zMin) {
-				rel_value = 0;
-			} else if (z > zMax) {
-				rel_value = 1;
-			} else {
-				if (m_direction) {
+            double rel_value;
+            if (z < zMin)
+			{
+				rel_value = Direction ? 0 : 1;
+			}
+			else if (z > zMax)
+			{
+				rel_value = Direction ? 1 : 0;
+			}
+			else
+			{
+				if (Direction)
+				{
 					rel_value = (z - zMin) / (zMax - zMin);
-				} else {
+				}
+				else
+				{
 					rel_value = (zMax - z) / (zMax - zMin);
 				}
 			}

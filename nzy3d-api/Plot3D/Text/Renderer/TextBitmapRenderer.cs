@@ -26,14 +26,14 @@ namespace nzy3D.Plot3D.Text.Renderers
 
 		public override void drawSimpleText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Colors.Color color)
 		{
-			GL.Color3(color.r, color.g, color.b);
+			GL.Color3(color.R, color.G, color.B);
 			GL.RasterPos3(position.x, position.y, position.z);
 			Glut.Glut.BitmapString(_font, s);
 		}
 
 		public override Maths.BoundingBox3d drawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord2d screenOffset, Maths.Coord3d sceneOffset)
 		{
-			GL.Color3(color.r, color.g, color.b);
+			GL.Color3(color.R, color.G, color.B);
 			Coord3d posScreen = cam.ModelToScreen(position);
 			float strlen = Glut.Glut.BitmapLength(_font, s);
 			float x = 0;

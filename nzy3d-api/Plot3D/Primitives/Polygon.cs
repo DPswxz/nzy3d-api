@@ -55,7 +55,7 @@ namespace nzy3D.Plot3D.Primitives
 					if ((_mapper != null)) {
 						p.Color = _mapper.Color(p.xyz);
 					}
-					GL.Color4(p.Color.r, p.Color.g, p.Color.b, p.Color.a);
+					GL.Color4(p.Color.R, p.Color.G, p.Color.B, p.Color.A);
 					GL.Vertex3(p.xyz.x, p.xyz.y, p.xyz.z);
 				}
 				GL.End();
@@ -68,7 +68,7 @@ namespace nzy3D.Plot3D.Primitives
 				if (_polygonOffsetFillEnable) {
 					EnablePolygonOffsetFill();
 				}
-				GL.Color4(_wfcolor.r, _wfcolor.g, _wfcolor.b, _wfcolor.a);
+				GL.Color4(_wfcolor.R, _wfcolor.G, _wfcolor.B, _wfcolor.A);
 				GL.LineWidth(_wfwidth);
 				GL.Begin(BeginMode.Polygon);
 				foreach (Point p in _points) {

@@ -1,23 +1,17 @@
-
-using Microsoft.VisualBasic;
+using OpenTK.Graphics;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 namespace nzy3D.Colors
 {
-	public class Color
+    public class Color
 	{
 
-		#region "Members"
-		public double r;
-		public double g;
-		public double b;
-		public double a;
-        #endregion
+		//"Members"
+		public double R;
+		public double G;
+		public double B;
+		public double A;
 
-        #region "Constants"
+        //"Constants"
         public static Color BLACK = new Color(0.0, 0.0, 0.0);
 		public static Color WHITE = new Color(1.0, 1.0, 1.0);
 		public static Color GRAY = new Color(0.5, 0.5, 0.5);
@@ -27,11 +21,10 @@ namespace nzy3D.Colors
 		public static Color YELLOW = new Color(1.0, 1.0, 0.0);
 		public static Color MAGENTA = new Color(1.0, 0.0, 1.0);
 		public static Color CYAN = new Color(0.0, 1.0, 1.0);
-			#endregion
+	
 		static internal Random randObj = new Random();
 
-		#region "Constructors"
-
+		//"Constructors"
 		/// <summary>
 		///  Initialize a color with values between 0 and 1 and an alpha channel set to maximum
 		/// </summary>
@@ -49,8 +42,8 @@ namespace nzy3D.Colors
 		/// <param name="r">Red value (between 0 and 255)</param>
 		/// <param name="g">Green value (between 0 and 255)</param>
 		/// <param name="b">Blue value (between 0 and 255)</param>
-		/// <remarks></remarks>
-		public Color(int r, int g, int b) : this(Convert.ToDouble(r / 255), Convert.ToDouble(g / 255), Convert.ToDouble(b / 255), 1)
+		public Color(int r, int g, int b)
+			: this(r, g, b, 1)
 		{
 		}
 
@@ -64,10 +57,10 @@ namespace nzy3D.Colors
 		/// <remarks></remarks>
 		public Color(double r, double g, double b, double a)
 		{
-			this.r = r;
-			this.g = g;
-			this.b = b;
-			this.a = a;
+			this.R = r;
+			this.G = g;
+			this.B = b;
+			this.A = a;
 		}
 
 		/// <summary>
@@ -77,14 +70,10 @@ namespace nzy3D.Colors
 		/// <param name="g">Green value (between 0 and 255)</param>
 		/// <param name="b">Blue value (between 0 and 255)</param>
 		/// <param name="a">a value (between 0 and 255)</param>
-		/// <remarks></remarks>
-		public Color(int r, int g, int b, int a) : this(Convert.ToDouble(r / 255), Convert.ToDouble(g / 255), Convert.ToDouble(b / 255), Convert.ToDouble(a / 255))
+		public Color(int r, int g, int b, int a)
+			: this(r / 255.0, g / 255.0, b / 255.0, a / 255.0)
 		{
 		}
-
-		#endregion
-
-		#region "Methods"
 
 		/// <summary>
 		/// Multiply current color components (including alpha value) by <paramref name="factor"/> color components values and assign value to current color.
@@ -93,22 +82,20 @@ namespace nzy3D.Colors
 		/// <remarks></remarks>
 		public void Mul(Color factor)
 		{
-			this.r *= factor.r;
-			this.g *= factor.g;
-			this.b *= factor.b;
-			this.a *= factor.a;
+			this.R *= factor.R;
+			this.G *= factor.G;
+			this.B *= factor.B;
+			this.A *= factor.A;
 		}
 
 		/// <summary>
 		/// Returns the hexadecimal representation of this color, without alpha channel value
 		/// </summary>
-		public string toHexString {
-			get {
-				string hexa = "#";
-				hexa += this.r.ToString("X2");
-				hexa += this.g.ToString("X2");
-				hexa += this.b.ToString("X2");
-				return hexa;
+		public string HexString
+		{
+			get
+			{
+				return $"#{R:X2}{G:X2}{B:X2}";
 			}
 		}
 
@@ -119,55 +106,65 @@ namespace nzy3D.Colors
 		/// <remarks></remarks>
 		public override string ToString()
 		{
-			return "(Color) r=" + r + " g=" + g + " b=" + b + " a=" + a;
+			return $"(Color) r={R} g={G} b={B} a={A}";
 		}
 
-		public double[] toArray()
+		public double[] ToArray()
 		{
 			return new double[] {
-				r,
-				g,
-				b,
-				a
+				R,
+				G,
+				B,
+				A
 			};
 		}
 
-		public double[] negative()
+		public double[] Negative()
 		{
 			return new double[] {
-				1 - r,
-				1 - g,
-				1 - b,
-				a
+				1 - R,
+				1 - G,
+				1 - B,
+				A
 			};
 		}
 
-		public Color negativeColor()
+		public Color NegativeColor()
 		{
-			return new Color(1 - r, 1 - g, 1 - b, a);
+			return new Color(1 - R, 1 - G, 1 - B, A);
 		}
 
-		public static Color random()
+		/// <summary>
+		/// Compute the distance between two colors.
+		/// </summary>
+		/// <remarks>See https://en.wikipedia.org/wiki/Color_difference</remarks>
+		public double Distance(Color c)
+		{
+			return Math.Sqrt(DistanceSq(c));
+		}
+
+		/// <summary>
+		/// Compute the square distance between two colors.
+		/// </summary>
+		/// <remarks>See https://en.wikipedia.org/wiki/Color_difference</remarks>
+		public double DistanceSq(Color c)
+		{
+			return Math.Pow(R - c.R, 2) + Math.Pow(G - c.G, 2) + Math.Pow(B - c.B, 2);
+		}
+
+		public static Color Random()
 		{
             return new Color(randObj.NextDouble(), randObj.NextDouble(), randObj.NextDouble());
 		}
 
-		public System.Drawing.Color toColor()
+		public System.Drawing.Color ToColor()
 		{
-            return System.Drawing.Color.FromArgb((int)a, (int)r, (int)g, (int)b);
-		}
-		#endregion
-
-		public OpenTK.Graphics.Color4 OpenTKColor4 {
-			get { return new OpenTK.Graphics.Color4(Convert.ToSingle(this.r), Convert.ToSingle(this.g), Convert.ToSingle(this.b), Convert.ToSingle(this.a)); }
+            return System.Drawing.Color.FromArgb((int)A, (int)R, (int)G, (int)B);
 		}
 
+		public Color4 OpenTKColor4 {
+			get { return new Color4(Convert.ToSingle(this.R), Convert.ToSingle(this.G), Convert.ToSingle(this.B), Convert.ToSingle(this.A)); }
+		}
 	}
 }
 
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

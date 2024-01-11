@@ -64,14 +64,14 @@ namespace nzy3D.Plot3D.Text.Renderers
 
 		public override void drawSimpleText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Colors.Color color)
 		{
-			GL.Color3(color.r, color.g, color.b);
+			GL.Color3(color.R, color.G, color.B);
 			GL.RasterPos3(position.x, position.y, position.z);
 			printString(s, Halign.RIGHT, Valign.GROUND);
 		}
 
 		public override Maths.BoundingBox3d drawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord2d screenOffset, Maths.Coord3d sceneOffset)
 		{
-			GL.Color3(color.r, color.g, color.b);
+			GL.Color3(color.R, color.G, color.B);
 			GL.RasterPos3(position.x, position.y, position.z);
 			BillBoardSize dims = printString(s, halign, valign);
 			Coord3d posScreen = cam.ModelToScreen(position);

@@ -90,7 +90,7 @@ namespace nzy3D.Plot3D.Primitives
 			}
 			GL.PointSize(_width);
 			GL.Begin(BeginMode.Points);
-			GL.Color4(_rgb.r, _rgb.g, _rgb.b, _rgb.a);
+			GL.Color4(_rgb.R, _rgb.G, _rgb.B, _rgb.A);
 			GL.Vertex3(_xyz.x, _xyz.y, _xyz.z);
 			GL.End();
 		}

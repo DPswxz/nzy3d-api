@@ -38,7 +38,7 @@ namespace nzy3D.Plot3D.Primitives
             {
                 foreach (Coord3d c in _coordinates) {
                     var color = _mapper.Color(c); // TODO: should store result in the point color
-                    GL.Color4(color.r, color.g, color.b, color.a);
+                    GL.Color4(color.R, color.G, color.B, color.A);
                     GL.Vertex3(c.x, c.y, c.z);
                 }
             }

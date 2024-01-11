@@ -38,7 +38,7 @@ namespace nzy3d_winformsDemo
             // mainPanel.Controls.Clear();
             //mainPanel.Controls.Add(myRenderer3D);
 
-            Chart chart = ChartsHelper.GetMapperSurface(myRenderer3D);
+            Chart chart = ChartsHelper.GetScanDate(myRenderer3D);
 
             axeLayout = chart.AxeLayout;
             

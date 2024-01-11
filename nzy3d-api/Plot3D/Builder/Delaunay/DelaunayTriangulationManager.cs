@@ -48,7 +48,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay
 			while ((trianglesIter.MoveNext())) {
 				Triangle_dt triangle = trianglesIter.Current;
 				// isHalfplane means a degenerated triangle 
-				if ((triangle.isHalfplane)) {
+				if ((triangle.IsHalfplane)) {
 					continue;
 				}
 				Polygon newPolygon = buildPolygonFrom(triangle);

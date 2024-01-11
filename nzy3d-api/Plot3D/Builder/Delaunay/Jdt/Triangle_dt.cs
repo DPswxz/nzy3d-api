@@ -67,7 +67,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 		/// <summary>
 		/// Returns true if this triangle is actually a half plane
 		/// </summary>
-		public bool isHalfplane {
+		public bool IsHalfplane {
 			get { return _halfplane; }
 			set { _halfplane = value; }
 		}
@@ -178,7 +178,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 			} else if (_c.Equals(p)) {
 				neighbor = _bcnext;
 			}
-			if (neighbor.Equals(prevTriangle) | neighbor.isHalfplane) {
+			if (neighbor.Equals(prevTriangle) | neighbor.IsHalfplane) {
 				if (_a.Equals(p)) {
 					neighbor = _abnext;
 				} else if (_b.Equals(p)) {
@@ -205,9 +205,13 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 			return _circum;
 		}
 
-		public bool circumcircle_contains(Point_dt p)
+		public bool CircumcircleContains(Point_dt p)
 		{
-			return _circum.Radius > _circum.Center.distance2(p);
+            if (IsHalfplane)
+            {
+                return false;
+            }
+            return _circum.Radius > _circum.Center.distance2(p);
 		}
 
 		public override string ToString()

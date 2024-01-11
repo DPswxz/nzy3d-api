@@ -67,17 +67,17 @@ namespace nzy3D.Plot3D.Primitives
 
 		internal void CallC(Color c)
 		{
-			GL.Color4(c.r, c.g, c.b, c.a);
+			GL.Color4(c.R, c.G, c.B, c.A);
 		}
 
 		internal void CallC(Color c, float alpha)
 		{
-			GL.Color4(c.r, c.g, c.b, alpha);
+			GL.Color4(c.R, c.G, c.B, alpha);
 		}
 
 		internal void CallWithAlphaFactor(Color c, float alpha)
 		{
-			GL.Color4(c.r, c.g, c.b, c.a * alpha);
+			GL.Color4(c.R, c.G, c.B, c.A * alpha);
 		}
 
 		/// <summary>

@@ -1,21 +1,13 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using nzy3D.Colors.ColorMaps;
 using nzy3D.Maths;
 
 namespace nzy3D.Colors
 {
-	public class ColorMapper : IColorMappable
+    public class ColorMapper : IColorMappable
 	{
-
 		private double m_zmin;
 		private double m_zmax;
-		private ColorMaps.IColorMap m_colormap;
+		private IColorMap m_colormap;
 
 		private Color m_factor;
 		public ColorMapper(IColorMap colormap, double zmin, double zmax, Color factor)
