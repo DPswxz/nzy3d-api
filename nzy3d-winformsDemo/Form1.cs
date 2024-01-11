@@ -35,26 +35,10 @@ namespace nzy3d_winformsDemo
             //Renderer3D myRenderer3D = new Renderer3D();
 
             // Add the Renderer control to the panel
-           // mainPanel.Controls.Clear();
+            // mainPanel.Controls.Clear();
             //mainPanel.Controls.Add(myRenderer3D);
 
-            // Create a range for the graph generation
-            Range range = new Range(-150, 150);
-            int steps = 50;
-
-            // Build a nice surface to display with cool alpha colors 
-            // (alpha 0.8 for surface color and 0.5 for wireframe)
-            Shape surface = Builder.buildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
-            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.8));
-            surface.FaceDisplayed = true;
-            surface.WireframeDisplayed = true;
-            surface.WireframeColor = Color.CYAN;
-            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.5));
-
-            // Create the chart and embed the surface within
-            Chart chart = new Chart(myRenderer3D, Quality.Nicest);
-            chart.Scene.Graph.Add(surface);
-
+            Chart chart = ChartsHelper.GetMapperSurface(myRenderer3D);
 
             axeLayout = chart.AxeLayout;
             

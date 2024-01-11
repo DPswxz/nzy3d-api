@@ -30,7 +30,7 @@ namespace nzy3d_winformsDemo
             // Create the chart
             Chart chart = new Chart(renderer3D, Quality.Nicest);
             chart.View.Maximized = false;
-            chart.View.CameraMode = CameraMode.PERSPECTIVE;
+            //chart.View.CameraMode = CameraMode.PERSPECTIVE;
 
             // Create a range for the graph generation
             Range range = new Range(-150, 150);
