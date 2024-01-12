@@ -1,18 +1,11 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using nzy3D.Plot3D.Primitives;
 using nzy3D.Plot3D.Rendering.View;
-using nzy3D.Plot3D.Transform;
+using System.Collections.Generic;
 
 namespace nzy3D.Plot3D.Rendering.Ordering
 {
 
-	public abstract class AbstractOrderingStrategy : IComparer<AbstractDrawable>
+    public abstract class AbstractOrderingStrategy : IComparer<AbstractDrawable>
 	{
 
 		internal Camera _camera;
@@ -59,10 +52,3 @@ namespace nzy3D.Plot3D.Rendering.Ordering
 	}
 
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

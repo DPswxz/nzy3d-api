@@ -133,7 +133,7 @@ namespace nzy3D.Plot3D.Primitives
 		public void Add(Point point)
 		{
 			_points.Add(point);
-			_bbox.@add(point);
+			_bbox.Add(point);
 			// Recompute Center
 			_center = new Coord3d();
 			foreach (Point p in _points) {

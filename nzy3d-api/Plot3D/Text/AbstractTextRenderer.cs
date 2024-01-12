@@ -22,23 +22,23 @@ namespace nzy3D.Plot3D.Text
 			defSceneOffset = new Coord3d();
 		}
 
-        public abstract void drawSimpleText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Colors.Color color);
+        public abstract void DrawSimpleText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Colors.Color color);
 
-		public Maths.BoundingBox3d drawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color)
+		public Maths.BoundingBox3d DrawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color)
 		{
-			return drawText(cam, s, position, halign, valign, color, defScreenOffset, defSceneOffset);
+			return DrawText(cam, s, position, halign, valign, color, defScreenOffset, defSceneOffset);
 		}
 
-		public Maths.BoundingBox3d drawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord2d screenOffset)
+		public Maths.BoundingBox3d DrawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord2d screenOffset)
 		{
-			return drawText(cam, s, position, halign, valign, color, screenOffset, defSceneOffset);
+			return DrawText(cam, s, position, halign, valign, color, screenOffset, defSceneOffset);
 		}
 
-		public abstract Maths.BoundingBox3d drawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord2d screenOffset, Maths.Coord3d sceneOffset);
+		public abstract Maths.BoundingBox3d DrawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord2d screenOffset, Maths.Coord3d sceneOffset);
 
-        public Maths.BoundingBox3d drawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord3d sceneOffset)
+        public Maths.BoundingBox3d DrawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord3d sceneOffset)
 		{
-			return drawText(cam, s, position, halign, valign, color, defScreenOffset, sceneOffset);
+			return DrawText(cam, s, position, halign, valign, color, defScreenOffset, sceneOffset);
 		}
 
 	}

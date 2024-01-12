@@ -1,16 +1,10 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using OpenTK.Graphics.OpenGL;
+using System;
 
 namespace nzy3D.Plot3D.Rendering.View
 {
 
-	public class ImageViewport : AbstractViewport
+    public class ImageViewport : AbstractViewport
 	{
 
 		internal int _imageHeight;

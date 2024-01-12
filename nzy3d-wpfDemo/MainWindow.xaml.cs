@@ -95,7 +95,7 @@ namespace nzy3d_wpfDemo
 
             // Create a mouse control
             nzy3D.Chart.Controllers.Mouse.Camera.CameraMouseController mouse = new nzy3D.Chart.Controllers.Mouse.Camera.CameraMouseController();
-            mouse.addControllerEventListener(renderer);
+            mouse.AddControllerEventListener(renderer);
             chart.addController(mouse);
 
             // This is just to ensure code is reentrant (used when code is not in Form_Load but another reentrant event)
@@ -103,13 +103,13 @@ namespace nzy3d_wpfDemo
 
             // Create a thread to control the camera based on mouse movements
             t = new nzy3D.Chart.Controllers.Thread.Camera.CameraThreadController();
-            t.addControllerEventListener(renderer);
-            mouse.addSlaveThreadController(t);
+            t.AddControllerEventListener(renderer);
+            mouse.AddSlaveThreadController(t);
             chart.addController(t);
             t.Start();
 
             // Associate the chart with current control
-            renderer.setView(chart.View);
+            renderer.SetView(chart.View);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -1,22 +1,14 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using nzy3D.Plot3D.Rendering.Canvas;
-using nzy3D.Plot3D.Rendering.Scene;
 using nzy3D.Events;
+using nzy3D.Plot3D.Rendering.Canvas;
 
 namespace nzy3D.Plot3D.Rendering.View
 {
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <remarks></remarks>
-	public class Renderer3D : OpenTK.GLControl, ICanvas, IControllerEventListener
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks></remarks>
+    public class Renderer3D : OpenTK.GLControl, ICanvas, IControllerEventListener
 	{
 
 		// TODO  : add trace add debug capabilities
@@ -28,23 +20,36 @@ namespace nzy3D.Plot3D.Rendering.View
 		internal bool _debugGL;
 
 		internal System.Drawing.Bitmap _image;
-		//Public Sub New(view As View)
-		//  Me.New(view, False, False)
-		//End Sub
+        public new int Width
+        {
+            get { return _width; }
+        }
+        public new int Height
+        {
+            get { return _height; }
+        }
+        public Renderer3D()
+        {
+            Resize += Renderer3D_Resize;
+            Paint += Renderer3D_Paint;
+        }
 
-		//Public Sub New(view As View, traceGL As Boolean, debugGL As Boolean)
-		//  _view = view
-		//  _traceGL = traceGL
-		//  _debugGL = debugGL
-		//End Sub
+        //Public Sub New(view As View)
+        //  Me.New(view, False, False)
+        //End Sub
 
-		//Private Sub Renderer3D_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        //Public Sub New(view As View, traceGL As Boolean, debugGL As Boolean)
+        //  _view = view
+        //  _traceGL = traceGL
+        //  _debugGL = debugGL
+        //End Sub
 
-		//End Sub
+        //Private Sub Renderer3D_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
-		private void Renderer3D_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        //End Sub
+        private void Renderer3D_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
 		{
-			if ((_view != null)) {
+			if (_view != null) {
 				_view.Clear();
 				_view.Render();
 				this.SwapBuffers();
@@ -79,7 +84,7 @@ namespace nzy3D.Plot3D.Rendering.View
 			_image.RotateFlip(System.Drawing.RotateFlipType.RotateNoneFlipY);
 		}
 
-		public void nextDisplayUpdateScreenshot()
+		public void NextDisplayUpdateScreenshot()
 		{
 			_doScreenshotAtNextDisplay = true;
 		}
@@ -88,17 +93,8 @@ namespace nzy3D.Plot3D.Rendering.View
 			get { return _image; }
 		}
 
-        public new int Width
-        {
-			get { return _width; }
-		}
 
-        public new int Height
-        {
-			get { return _height; }
-		}
-
-		public void addKeyListener(Events.Keyboard.IKeyListener listener)
+		public void AddKeyListener(Events.Keyboard.IKeyListener listener)
 		{
 			KeyUp += listener.KeyReleased;
 			KeyDown += listener.KeyPressed;
@@ -107,7 +103,7 @@ namespace nzy3D.Plot3D.Rendering.View
 			// be cautious with cross-terminology (key_down / key_pressed / key_typed)
 		}
 
-		public void addMouseListener(Events.Mouse.IMouseListener listener)
+		public void AddMouseListener(Events.Mouse.IMouseListener listener)
 		{
 			MouseClick += listener.MouseClicked;
 			MouseDown += listener.MousePressed;
@@ -115,13 +111,13 @@ namespace nzy3D.Plot3D.Rendering.View
 			MouseDoubleClick += listener.MouseDoubleClicked;
 		}
 
-		public void addMouseMotionListener(Events.Mouse.IMouseMotionListener listener)
+		public void AddMouseMotionListener(Events.Mouse.IMouseMotionListener listener)
 		{
 			MouseMove += listener.MouseMoved;
 			// NOT AVAILABLE IN WinForms : AddHandler ???, AddressOf listener.MouseDragged
 		}
 
-		public void addMouseWheelListener(Events.Mouse.IMouseWheelListener listener)
+		public void AddMouseWheelListener(Events.Mouse.IMouseWheelListener listener)
 		{
 			MouseWheel += listener.MouseWheelMoved;
 		}
@@ -130,7 +126,7 @@ namespace nzy3D.Plot3D.Rendering.View
 		public void Dispose1()
 		{
 		}
-		void Canvas.ICanvas.Dispose()
+		void ICanvas.Dispose()
 		{
 			Dispose1();
 		}
@@ -140,7 +136,7 @@ namespace nzy3D.Plot3D.Rendering.View
 			this.Invalidate();
 		}
 
-		public void removeKeyListener(Events.Keyboard.IKeyListener listener)
+		public void RemoveKeyListener(Events.Keyboard.IKeyListener listener)
 		{
 			KeyUp -= listener.KeyReleased;
 			KeyDown -= listener.KeyPressed;
@@ -149,20 +145,20 @@ namespace nzy3D.Plot3D.Rendering.View
 			// be cautious with cross-terminology (key_down / key_pressed / key_typed)
 		}
 
-		public void removeMouseListener(Events.Mouse.IMouseListener listener)
+		public void RemoveMouseListener(Events.Mouse.IMouseListener listener)
 		{
 			MouseClick -= listener.MouseClicked;
 			MouseDown -= listener.MousePressed;
 			MouseUp -= listener.MouseReleased;
 		}
 
-		public void removeMouseMotionListener(Events.Mouse.IMouseMotionListener listener)
+		public void RemoveMouseMotionListener(Events.Mouse.IMouseMotionListener listener)
 		{
 			MouseMove -= listener.MouseMoved;
 			// NOT AVAILABLE IN WinForms : RemoveHandler ???, AddressOf listener.MouseDragged
 		}
 
-		public void removeMouseWheelListener(Events.Mouse.IMouseWheelListener listener)
+		public void RemoveMouseWheelListener(Events.Mouse.IMouseWheelListener listener)
 		{
 			MouseWheel -= listener.MouseWheelMoved;
 		}
@@ -188,7 +184,7 @@ namespace nzy3D.Plot3D.Rendering.View
 			get { return _view; }
 		}
 
-		public void setView(View value)
+		public void SetView(View value)
 		{
 			_view = value;
 			_view.Init();
@@ -200,19 +196,6 @@ namespace nzy3D.Plot3D.Rendering.View
 		{
 			this.ForceRepaint();
 		}
-		public Renderer3D()
-		{
-			Resize += Renderer3D_Resize;
-			Paint += Renderer3D_Paint;
-		}
+
 	}
-
 }
-
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

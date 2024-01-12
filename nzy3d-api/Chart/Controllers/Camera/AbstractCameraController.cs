@@ -14,9 +14,8 @@ namespace nzy3D.Chart.Controllers.Camera
 
 	public class AbstractCameraController : AbstractController
 	{
-
-
 		public static bool DEFAULT_UPDATE_VIEW = false;
+
 		public AbstractCameraController() : base()
 		{
 		}
@@ -35,7 +34,7 @@ namespace nzy3D.Chart.Controllers.Camera
 			foreach (Chart c in _targets) {
 				c.View.Rotate(move, DEFAULT_UPDATE_VIEW);
 			}
-			fireControllerEvent(ControllerType.ROTATE, move);
+			FireControllerEvent(ControllerType.ROTATE, move);
 		}
 
 
@@ -49,7 +48,7 @@ namespace nzy3D.Chart.Controllers.Camera
 			foreach (Chart c in _targets) {
 				c.View.Shift(factor, updateView);
 			}
-			fireControllerEvent(ControllerType.SHIFT, factor);
+			FireControllerEvent(ControllerType.SHIFT, factor);
 		}
 
 		protected void ZoomX(float factor)
@@ -62,7 +61,7 @@ namespace nzy3D.Chart.Controllers.Camera
 			foreach (Chart c in _targets) {
 				c.View.ZoomX(factor, updateView);
 			}
-			fireControllerEvent(ControllerType.ZOOM, factor);
+			FireControllerEvent(ControllerType.ZOOM, factor);
 		}
 
 		protected void ZoomY(float factor)
@@ -75,7 +74,7 @@ namespace nzy3D.Chart.Controllers.Camera
 			foreach (Chart c in _targets) {
 				c.View.ZoomY(factor, updateView);
 			}
-			fireControllerEvent(ControllerType.ZOOM, factor);
+			FireControllerEvent(ControllerType.ZOOM, factor);
 		}
 
 		protected void ZoomZ(float factor)
@@ -88,16 +87,8 @@ namespace nzy3D.Chart.Controllers.Camera
 			foreach (Chart c in _targets) {
 				c.View.ZoomZ(factor, updateView);
 			}
-			fireControllerEvent(ControllerType.ZOOM, factor);
+			FireControllerEvent(ControllerType.ZOOM, factor);
 		}
-
 	}
-
 }
 
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

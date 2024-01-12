@@ -1,25 +1,18 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
+using nzy3D.Chart.Controllers.Camera;
+using nzy3D.Maths;
 using nzy3D.Plot3D.Primitives;
-using nzy3D.Plot3D.Primitives.Axes;
+using nzy3D.Plot3D.Primitives.Axes.Layout;
 using nzy3D.Plot3D.Rendering.Canvas;
-using nzy3D.Plot3D.Rendering.Scene;
 using nzy3D.Plot3D.Rendering.View;
 using nzy3D.Plot3D.Rendering.View.Modes;
-using nzy3D.Maths;
-using nzy3D.Chart.Controllers.Camera;
-using nzy3D.Plot3D.Primitives.Axes.Layout;
+using System;
+using System.Collections.Generic;
 
 
 namespace nzy3D.Chart
 {
 
-	public class Chart
+    public class Chart
 	{
 
 		protected ChartScene _scene;

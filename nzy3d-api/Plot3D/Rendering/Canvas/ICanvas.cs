@@ -1,17 +1,10 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using nzy3D.Events.Mouse;
 using nzy3D.Events.Keyboard;
+using nzy3D.Events.Mouse;
 
 namespace nzy3D.Plot3D.Rendering.Canvas
 {
 
-	public interface ICanvas
+    public interface ICanvas
 	{
 
 		/// <summary>
@@ -19,21 +12,22 @@ namespace nzy3D.Plot3D.Rendering.Canvas
 		/// </summary>
 
 		View.View View { get; }
+
 		/// <summary>
 		/// Returns the renderer's width, i.e. the display width.
 		/// </summary>
-
 		int RendererWidth { get; }
+
 		/// <summary>
 		/// Returns the renderer's height, i.e. the display height.
 		/// </summary>
-
 		int RendererHeight { get; }
+
 		/// <summary>
 		/// Invoked when a user requires the Canvas to be repainted (e.g. a non 3d layer has changed).
 		/// </summary>
-
 		void ForceRepaint();
+
 		/// <summary>
 		/// Returns an image with the current renderer's size.
 		/// </summary>
@@ -42,24 +36,15 @@ namespace nzy3D.Plot3D.Rendering.Canvas
 		/// <summary>
 		/// Performs all required cleanup when destroying a Canvas.
 		/// </summary>
-
 		void Dispose();
-		void addMouseListener(IMouseListener listener);
-		void removeMouseListener(IMouseListener listener);
-		void addMouseWheelListener(IMouseWheelListener listener);
-		void removeMouseWheelListener(IMouseWheelListener listener);
-		void addMouseMotionListener(IMouseMotionListener listener);
-		void removeMouseMotionListener(IMouseMotionListener listener);
-		void addKeyListener(IKeyListener listener);
+		void AddMouseListener(IMouseListener listener);
+		void RemoveMouseListener(IMouseListener listener);
+		void AddMouseWheelListener(IMouseWheelListener listener);
+		void RemoveMouseWheelListener(IMouseWheelListener listener);
+		void AddMouseMotionListener(IMouseMotionListener listener);
+		void RemoveMouseMotionListener(IMouseMotionListener listener);
+		void AddKeyListener(IKeyListener listener);
 
-		void removeKeyListener(IKeyListener listener);
+		void RemoveKeyListener(IKeyListener listener);
 	}
-
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

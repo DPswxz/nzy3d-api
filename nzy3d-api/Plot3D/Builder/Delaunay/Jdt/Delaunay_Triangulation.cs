@@ -192,28 +192,23 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 					allColinear = false;
 					break; // TODO: might not be correct. Was : Exit Select
 
-					break;
 				case Point_dt.RIGHT:
 					startTriangle = extendOutside(firstT, p);
 					allColinear = false;
 					break; // TODO: might not be correct. Was : Exit Select
 
-					break;
 				case Point_dt.ONSEGMENT:
 					insertCollinear(p, Point_dt.ONSEGMENT);
 					break; // TODO: might not be correct. Was : Exit Select
 
-					break;
 				case Point_dt.INFRONTOFA:
 					insertCollinear(p, Point_dt.INFRONTOFA);
 					break; // TODO: might not be correct. Was : Exit Select
 
-					break;
 				case Point_dt.BEHINDB:
 					insertCollinear(p, Point_dt.BEHINDB);
 					break; // TODO: might not be correct. Was : Exit Select
 
-					break;
 			}
 			return null;
 		}
@@ -239,7 +234,6 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 					firstP = p;
 					break; // TODO: might not be correct. Was : Exit Select
 
-					break;
 				case Point_dt.BEHINDB:
 					t = new Triangle_dt(p, lastP);
 					tp = new Triangle_dt(lastP, p);
@@ -255,7 +249,6 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 					lastP = p;
 					break; // TODO: might not be correct. Was : Exit Select
 
-					break;
 				case Point_dt.ONSEGMENT:
 					u = firstT;
 					while (p.isGreater(u.a)) {
@@ -279,7 +272,6 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 						firstT = t;
 					break; // TODO: might not be correct. Was : Exit Select
 
-					break;
 			}
 		}
 
@@ -497,7 +489,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay.Jdt
 					return next_t;
 				curr = next_t;
 			}
-			return null;
+			//return null;
 			// Never supposed to get here
 		}
 

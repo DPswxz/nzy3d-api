@@ -1,17 +1,9 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using nzy3D.Chart;
 using nzy3D.Events;
+using System.Collections.Generic;
 
 namespace nzy3D.Chart.Controllers
 {
-
-	public class AbstractController
+    public class AbstractController
 	{
 
 		protected List<Chart> _targets = new List<Chart>();
@@ -46,31 +38,22 @@ namespace nzy3D.Chart.Controllers
 			_controllerListeners.Clear();
 		}
 
-		public void addControllerEventListener(IControllerEventListener listener)
+		public void AddControllerEventListener(IControllerEventListener listener)
 		{
 			_controllerListeners.Add(listener);
 		}
 
-		public void removeControllerEventListener(IControllerEventListener listener)
+		public void RemoveControllerEventListener(IControllerEventListener listener)
 		{
 			_controllerListeners.Remove(listener);
 		}
 
-		protected void fireControllerEvent(ControllerType type, object value)
+		protected void FireControllerEvent(ControllerType type, object value)
 		{
 			ControllerEventArgs e = new ControllerEventArgs(this, type, value);
 			foreach (IControllerEventListener aListener in _controllerListeners) {
 				aListener.ControllerEventFired(e);
 			}
 		}
-
 	}
-
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

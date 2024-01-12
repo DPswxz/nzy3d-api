@@ -62,14 +62,14 @@ namespace nzy3D.Plot3D.Text.Renderers
 		{
 		}
 
-		public override void drawSimpleText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Colors.Color color)
+		public override void DrawSimpleText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Colors.Color color)
 		{
 			GL.Color3(color.R, color.G, color.B);
 			GL.RasterPos3(position.x, position.y, position.z);
 			printString(s, Halign.RIGHT, Valign.GROUND);
 		}
 
-		public override Maths.BoundingBox3d drawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord2d screenOffset, Maths.Coord3d sceneOffset)
+		public override Maths.BoundingBox3d DrawText(Rendering.View.Camera cam, string s, Maths.Coord3d position, Align.Halign halign, Align.Valign valign, Colors.Color color, Maths.Coord2d screenOffset, Maths.Coord3d sceneOffset)
 		{
 			GL.Color3(color.R, color.G, color.B);
 			GL.RasterPos3(position.x, position.y, position.z);
@@ -84,8 +84,8 @@ namespace nzy3D.Plot3D.Text.Renderers
 			topRight.y = botLeft.y + dims.yoffset;
 			topRight.z = botLeft.z;
 			BoundingBox3d txtBounds = new BoundingBox3d();
-			txtBounds.@add(cam.ScreenToModel(botLeft));
-			txtBounds.@add(cam.ScreenToModel(topRight));
+			txtBounds.Add(cam.ScreenToModel(botLeft));
+			txtBounds.Add(cam.ScreenToModel(topRight));
 			return txtBounds;
 		}
 

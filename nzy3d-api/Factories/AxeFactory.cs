@@ -1,10 +1,3 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using nzy3D.Maths;
 using nzy3D.Plot3D.Primitives.Axes;
 using nzy3D.Plot3D.Rendering.View;
@@ -12,7 +5,7 @@ using nzy3D.Plot3D.Rendering.View;
 namespace nzy3D.Factories
 {
 
-	public class AxeFactory
+    public class AxeFactory
 	{
 		public static object getInstance(BoundingBox3d box, View view)
 		{
@@ -21,12 +14,4 @@ namespace nzy3D.Factories
 			return axe;
 		}
 	}
-
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

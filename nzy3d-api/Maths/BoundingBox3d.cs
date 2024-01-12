@@ -1,23 +1,17 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using nzy3D.Plot3D.Primitives;
+using System.Collections.Generic;
 
 namespace nzy3D.Maths
 {
 
-	/// <summary>
-	/// A BoundingBox3d stores a couple of maximal and minimal limit on
-	///  each dimension (x, y) in cartesian coordinates. It provides functions for enlarging
-	///  the box by adding cartesian coordinates or an other
-	///  BoundingBox3d (that is equivalent to computing the union of the
-	///  current BoundingBox and another one).
-	/// </summary>
-	public class BoundingBox3d
+    /// <summary>
+    /// A BoundingBox3d stores a couple of maximal and minimal limit on
+    ///  each dimension (x, y) in cartesian coordinates. It provides functions for enlarging
+    ///  the box by adding cartesian coordinates or an other
+    ///  BoundingBox3d (that is equivalent to computing the union of the
+    ///  current BoundingBox and another one).
+    /// </summary>
+    public class BoundingBox3d
 	{
 
 		private double m_xmin;
@@ -25,7 +19,6 @@ namespace nzy3D.Maths
 		private double m_ymin;
 		private double m_ymax;
 		private double m_zmin;
-
 		private double m_zmax;
 		/// <summary>
 		/// Initialize a BoundingBox by calling its reset method.
@@ -42,7 +35,7 @@ namespace nzy3D.Maths
 		{
 			reset();
 			foreach (Coord3d c in lst) {
-				@add(c);
+				Add(c);
 			}
 		}
 
@@ -53,7 +46,7 @@ namespace nzy3D.Maths
 		{
 			reset();
 			foreach (Point p in pol.GetPoints) {
-				@add(p);
+				Add(p);
 			}
 		}
 
@@ -85,7 +78,7 @@ namespace nzy3D.Maths
 		}
 
 		/// <summary>
-		///  Initialize the bounding box with Double.MAX_VALUE as minimum
+		/// Initialize the bounding box with Double.MAX_VALUE as minimum
 		/// value, and Double.MIN_VALUE as maximum value for each dimension.
 		/// </summary>
 		public void reset()
@@ -110,7 +103,7 @@ namespace nzy3D.Maths
 		/// Adds an x,y,z point to the bounding box, and enlarge the bounding
 		/// box if this points lies outside of it.
 		/// </summary>
-		public void @add(double x, double y, double z)
+		public void Add(double x, double y, double z)
 		{
 			if (x > m_xmax)
 				m_xmax = x;
@@ -130,27 +123,27 @@ namespace nzy3D.Maths
 		/// Adds a <see cref="Coord3d"/> point to the bounding box, and enlarge the bounding
 		/// box if this points lies outside of it.
 		/// </summary>
-		public void @add(Coord3d p)
+		public void Add(Coord3d p)
 		{
-			this.@add(p.x, p.y, p.z);
+			this.Add(p.x, p.y, p.z);
 		}
 
 		/// <summary>
 		/// Adds a set of coordinates from a polygon to the bounding box
 		/// </summary>
-        public void @add(Polygon pol)
+        public void Add(Polygon pol)
 		{
 			foreach (Point p in pol.GetPoints) {
-				@add(p);
+				Add(p);
 			}
 		}
 
 		/// <summary>
 		/// Adds a point to the bounding box
 		/// </summary>
-        public void @add(Point p)
+        public void Add(Point p)
 		{
-			@add(p.xyz.x, p.xyz.y, p.xyz.z);
+			Add(p.xyz.x, p.xyz.y, p.xyz.z);
 		}
 
 		/// <summary>
@@ -159,8 +152,8 @@ namespace nzy3D.Maths
 		/// </summary>
 		public void Add(BoundingBox3d b)
 		{
-			this.@add(b.m_xmin, b.m_ymin, b.m_zmin);
-			this.@add(b.m_xmax, b.m_ymax, b.m_zmax);
+			this.Add(b.m_xmin, b.m_ymin, b.m_zmin);
+			this.Add(b.m_xmax, b.m_ymax, b.m_zmax);
 		}
 
 		/// <summary>

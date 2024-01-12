@@ -1,16 +1,7 @@
 ﻿using nzy3D.Chart;
-using nzy3D.Chart.Controllers.Thread.Camera;
 using nzy3D.Chart.Controllers.Mouse.Camera;
-using nzy3D.Colors;
-using nzy3D.Colors.ColorMaps;
-using nzy3D.Maths;
-using nzy3D.Plot3D.Builder;
-using nzy3D.Plot3D.Builder.Concrete;
-using nzy3D.Plot3D.Primitives;
+using nzy3D.Chart.Controllers.Thread.Camera;
 using nzy3D.Plot3D.Primitives.Axes.Layout;
-using nzy3D.Plot3D.Rendering.Canvas;
-
-using nzy3d_wpfDemo;
 using System;
 using System.Windows.Forms;
 
@@ -19,13 +10,18 @@ namespace nzy3d_winformsDemo
     public partial class Form1 : Form
     {
 
-        private CameraThreadController t;
+        private CameraThreadController cameraController;
         private IAxeLayout axeLayout;
 
         public Form1()
         {
             InitializeComponent();
             //InitRenderer();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            InitRenderer();
         }
 
         private void InitRenderer()
@@ -41,7 +37,7 @@ namespace nzy3d_winformsDemo
             Chart chart = ChartsHelper.GetScanDate(myRenderer3D);
 
             axeLayout = chart.AxeLayout;
-            
+
             // All activated by default
             DisplayXTicks = true;
             DisplayXAxisLabel = true;
@@ -53,30 +49,30 @@ namespace nzy3d_winformsDemo
 
             // Create a mouse control
             CameraMouseController mouse = new CameraMouseController();
-            mouse.addControllerEventListener(myRenderer3D);
+            mouse.AddControllerEventListener(myRenderer3D);
             chart.addController(mouse);
 
             // This is just to ensure code is reentrant (used when code is not called in Form_Load but another reentrant event)
             DisposeBackgroundThread();
 
             // Create a thread to control the camera based on mouse movements
-            t = new CameraThreadController();
-            t.addControllerEventListener(myRenderer3D);
-            mouse.addSlaveThreadController(t);
-            chart.addController(t);
-            t.Start();
+            cameraController = new CameraThreadController();
+            cameraController.AddControllerEventListener(myRenderer3D);
+            mouse.AddSlaveThreadController(cameraController);
+            chart.addController(cameraController);
+            cameraController.Start();
 
             // Associate the chart with current control
-            myRenderer3D.setView(chart.View);
+            myRenderer3D.SetView(chart.View);
 
             this.Refresh();
         }
-        
+
         private void DisposeBackgroundThread()
         {
-            if ((t != null))
+            if ((cameraController != null))
             {
-                t.Dispose();
+                cameraController.Dispose();
             }
         }
 
@@ -237,10 +233,6 @@ namespace nzy3d_winformsDemo
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            InitRenderer();
-        }
 
     }
 }

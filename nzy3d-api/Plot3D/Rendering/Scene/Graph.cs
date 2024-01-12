@@ -236,7 +236,7 @@ namespace nzy3D.Plot3D.Rendering.Scene
 					BoundingBox3d box = new BoundingBox3d();
 					lock (_components) {
 						foreach (AbstractDrawable a in _components) {
-							if (((a != null)) && ((a.Bounds != null))) {
+							if ((a != null) && (a.Bounds != null)) {
 								box.Add(a.Bounds);
 							}
 						}
@@ -302,10 +302,3 @@ namespace nzy3D.Plot3D.Rendering.Scene
 	}
 
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

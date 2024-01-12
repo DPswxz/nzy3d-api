@@ -12,14 +12,13 @@ using System.Collections.Generic;
 
 namespace nzy3D.Plot3D.Rendering.View
 {
-
     public class View
 	{
 
 		public static float STRETCH_RATIO = 0.25f;
-			// force to have all object maintained in screen, meaning axebox won't always keep the same size.
+		// force to have all object maintained in screen, meaning axebox won't always keep the same size.
 		internal bool MAINTAIN_ALL_OBJECTS_IN_VIEW = false;
-			// display a magenta parallelepiped (debug)
+		// display a magenta parallelepiped (debug)
 		internal bool DISPLAY_AXE_WHOLE_BOUNDS = false;
 		internal bool _axeBoxDisplayed = true;
 		internal bool _squared = true;
@@ -127,8 +126,8 @@ namespace nzy3D.Plot3D.Rendering.View
 
 		public void Shift(float factor, bool updateView)
 		{
-			nzy3D.Maths.Scale current = this.Scale;
-			nzy3D.Maths.Scale newScale = current.@add(factor * current.Range);
+			Scale current = this.Scale;
+			Scale newScale = current.Add(factor * current.Range);
 			setScale(newScale, updateView);
 			//fireControllerEvent(ControllerType.SHIFT, newScale);
 		}
@@ -277,12 +276,12 @@ namespace nzy3D.Plot3D.Rendering.View
 			set { _dimensionDirty = value; }
 		}
 
-		public nzy3D.Maths.Scale Scale {
-			get { return new nzy3D.Maths.Scale(this.Bounds.ZMin, this.Bounds.ZMax); }
+		public Scale Scale {
+			get { return new Scale(this.Bounds.ZMin, this.Bounds.ZMax); }
 			set { setScale(value, true); }
 		}
 
-		public void setScale(nzy3D.Maths.Scale scale, bool notify)
+		public void setScale(Scale scale, bool notify)
 		{
 			BoundingBox3d bounds = this.Bounds;
 			bounds.ZMin = scale.Min;
@@ -331,8 +330,8 @@ namespace nzy3D.Plot3D.Rendering.View
 		public void setViewPoint(Coord3d polar, bool updateView)
 		{
 			_viewpoint = polar;
-			_viewpoint.y = (_viewpoint.y < -PI_div2 ? -PI_div2 : _viewpoint.y);
-			_viewpoint.y = (_viewpoint.y > PI_div2 ? PI_div2 : _viewpoint.y);
+			_viewpoint.y = _viewpoint.y < -PI_div2 ? -PI_div2 : _viewpoint.y;
+			_viewpoint.y = _viewpoint.y > PI_div2 ? PI_div2 : _viewpoint.y;
 			if (updateView) {
 				Shoot();
 			}
@@ -730,7 +729,7 @@ namespace nzy3D.Plot3D.Rendering.View
 			// maintain a reasonnable distance to the scene for viewing it
 			switch (_viewmode) {
 				case Modes.ViewPositionMode.FREE:
-					eye = _viewpoint.cartesian().@add(target);
+					eye = _viewpoint.cartesian().Add(target);
 					break;
 				case Modes.ViewPositionMode.TOP:
 					eye = _viewpoint;
@@ -738,12 +737,12 @@ namespace nzy3D.Plot3D.Rendering.View
 					// on x
 					eye.y = PI_div2;
 					// on top
-                    eye = eye.cartesian().@add(target);
+                    eye = eye.cartesian().Add(target);
 					break;
 				case Modes.ViewPositionMode.PROFILE:
 					eye = _viewpoint;
 					eye.y = 0;
-                    eye = eye.cartesian().@add(target);
+                    eye = eye.cartesian().Add(target);
 					break;
 				default:
 					throw new Exception("Unsupported viewmode : " + _viewmode);
@@ -864,7 +863,7 @@ namespace nzy3D.Plot3D.Rendering.View
 			// NOT Implemented so far
 		}
 
-		internal void correctCameraPositionForIncludingTextLabels(ViewPort viewport)
+		internal void CorrectCameraPositionForIncludingTextLabels(ViewPort viewport)
 		{
 			_cam.SetViewPort(viewport);
 			_cam.shoot(_cameraMode);
@@ -879,21 +878,12 @@ namespace nzy3D.Plot3D.Rendering.View
 			} else {
 				_cam.RenderingSphereRadius = (float)newBounds.getRadius();
 				Coord3d target = newBounds.getCenter();
-				Coord3d eye = _viewpoint.cartesian().@add(target);
+				Coord3d eye = _viewpoint.cartesian().Add(target);
 				_cam.Target = target;
 				_cam.Eye = eye;
 			}
 		}
 
 		#endregion
-
 	}
-
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

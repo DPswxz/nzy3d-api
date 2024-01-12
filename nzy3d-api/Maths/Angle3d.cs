@@ -62,7 +62,7 @@ namespace nzy3D.Maths
 			Coord3d c2 = new Coord3d(x2, y2, z2);
 			Vector3d v1 = new Vector3d(x1, y1, z1, x2, y2, z2);
 			Vector3d v3 = new Vector3d(x3, y3, z3, x2, y2, z2);
-			Coord3d c4 = v1.cross(v3).@add(c2);
+			Coord3d c4 = v1.cross(v3).Add(c2);
 			Vector3d v4 = new Vector3d(c4, c2);
 			return (c4.z >= 0 ? 1 : -1) * v4.norm() / (v1.norm() * v3.norm());
 		}

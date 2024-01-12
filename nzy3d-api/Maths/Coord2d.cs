@@ -1,47 +1,33 @@
-
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 namespace nzy3D.Maths
 {
-
-	/// <summary>
-	/// A <see cref="maths.Coord2d"/> stores a 2 dimensional coordinate for cartesian (x,y) or
-	/// polar (a,r) mode, and provide operators allowing to add, substract,
-	/// multiply and divises coordinate values, as well as computing the distance between
-	/// two points, and converting polar and cartesian coordinates.
-	/// </summary>
-	/// <remarks></remarks>
-	public class Coord2d
+    /// <summary>
+    /// A <see cref="maths.Coord2d"/> stores a 2 dimensional coordinate for cartesian (x,y) or
+    /// polar (a,r) mode, and provide operators allowing to add, substract,
+    /// multiply and divises coordinate values, as well as computing the distance between
+    /// two points, and converting polar and cartesian coordinates.
+    /// </summary>
+    /// <remarks></remarks>
+    public class Coord2d
 	{
-
-		#region "Members"
+		//Members
 		public double x;
-			#endregion
 		public double y;
 
-		#region "Constants"
+		//Constants
 		public static Coord2d ORIGIN = new Coord2d(0, 0);
 		public static Coord2d INVALID = new Coord2d(double.NaN, double.NaN);
-			#endregion
 		public static Coord2d IDENTITY = new Coord2d(1, 1);
 
-		#region "Constructors"
+		//Constructors
 		public Coord2d() : this(0, 0)
 		{
 		}
-
 		public Coord2d(double xi, double yi)
 		{
 			this.x = xi;
 			this.y = yi;
 		}
-		#endregion
-
-		#region "Constructors"
 
 		/// <summary>
 		/// Set all values of Coord2d
@@ -54,7 +40,6 @@ namespace nzy3D.Maths
 			y = yy;
 			return this;
 		}
-
 
 		/// <summary>
 		/// Add a value to all components of the current <see cref="Coord2d"/> and return the result
@@ -386,17 +371,5 @@ namespace nzy3D.Maths
 				y
 			};
 		}
-
-		#endregion
-
 	}
-
 }
-
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -7,6 +7,7 @@ using nzy3D.Plot3D.Builder.Concrete;
 using nzy3D.Plot3D.Primitives;
 using nzy3D.Plot3D.Primitives.Axes.Layout.Renderers;
 using nzy3D.Plot3D.Rendering.Canvas;
+using nzy3D.Plot3D.Rendering.Legends;
 using nzy3D.Plot3D.Rendering.View;
 using nzy3D.Plot3D.Rendering.View.Modes;
 using nzy3d_wpfDemo;
@@ -110,7 +111,7 @@ namespace nzy3d_winformsDemo
         public static Chart GetScanDate(Renderer3D renderer3D)
         {
             // Generate data
-            var labels = new TickLabelMap();
+            TickLabelMap labels = new TickLabelMap();
             List<Coord3d> coords = new List<Coord3d>();
             bool isHeader = true;
             string[] header;
@@ -132,7 +133,7 @@ namespace nzy3d_winformsDemo
                     //var dateL = date.ToOADate();
                     for (int i = 1; i < data.Length; i++)
                     {
-                        coords.Add(new Coord3d(i + 200, double.Parse(data[0]), double.Parse(data[i])));
+                        coords.Add(new Coord3d(i + 219, double.Parse(data[0]), double.Parse(data[i])));
                     }
                 }
             }
@@ -154,6 +155,7 @@ namespace nzy3d_winformsDemo
             surface.WireframeDisplayed = false;
             surface.WireframeColor = Color.GREEN;
             surface.WireframeColor.Mul(new Color(1, 1, 1, 0.2));
+            
 
             // Add surface to chart
             chart.Scene.Graph.Add(surface);
@@ -179,9 +181,11 @@ namespace nzy3d_winformsDemo
             coords = coords.OrderBy(p => p.x).ThenBy(p => p.y).ThenBy(p => p.z).ToList();
 
             // Create chart
+            BoundingBox3d clippingBox = new BoundingBox3d(-0.2, 0.2, -0.2, 0.2, -0.2, 0.2);
             Chart chart = new Chart(renderer3D, Quality.Nicest);
             chart.View.Maximized = false;
-            chart.View.CameraMode = CameraMode.PERSPECTIVE;
+            
+            //chart.View.CameraMode = CameraMode.PERSPECTIVE;
 
             // Create surface
             var surface = Builder.BuildDelaunay(coords);
@@ -190,8 +194,7 @@ namespace nzy3d_winformsDemo
             surface.WireframeDisplayed = true;
             surface.WireframeColor = Color.CYAN;
             surface.WireframeColor.Mul(new Color(1, 1, 1, 0.5));
-
-            // Add surface to chart
+            // Add surface to chart     
             chart.Scene.Graph.Add(surface);
 
             return chart;

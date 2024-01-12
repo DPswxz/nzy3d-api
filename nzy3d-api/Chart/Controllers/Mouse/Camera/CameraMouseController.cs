@@ -1,27 +1,18 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using nzy3D.Chart;
 using nzy3D.Chart.Controllers.Camera;
-using nzy3D.Chart.Controllers.Mouse;
 using nzy3D.Chart.Controllers.Thread.Camera;
-using nzy3D.Maths;
 using nzy3D.Events.Mouse;
+using nzy3D.Maths;
 
 namespace nzy3D.Chart.Controllers.Mouse.Camera
 {
 
-	public class CameraMouseController : AbstractCameraController, IMouseListener, IMouseMotionListener, IMouseWheelListener
+    public class CameraMouseController : AbstractCameraController, IMouseListener, IMouseMotionListener, IMouseWheelListener
 	{
 
 		protected Coord2d _prevMouse;
 		protected CameraThreadController _threadController;
 
-		protected float _prevZoomZ = 1;
+		protected float _prevZoom = 1;
 		public CameraMouseController()
 		{
 		}
@@ -35,19 +26,19 @@ namespace nzy3D.Chart.Controllers.Mouse.Camera
 		{
 			base.Register(chart);
 			_prevMouse = Coord2d.ORIGIN;
-			chart.Canvas.addMouseListener(this);
-			chart.Canvas.addMouseMotionListener(this);
-			chart.Canvas.addMouseWheelListener(this);
+			chart.Canvas.AddMouseListener(this);
+			chart.Canvas.AddMouseMotionListener(this);
+			chart.Canvas.AddMouseWheelListener(this);
 		}
 
 		public override void Dispose()
 		{
 			foreach (Chart c in _targets) {
-				c.Canvas.removeMouseListener(this);
-				c.Canvas.removeMouseMotionListener(this);
-				c.Canvas.removeMouseWheelListener(this);
+				c.Canvas.RemoveMouseListener(this);
+				c.Canvas.RemoveMouseMotionListener(this);
+				c.Canvas.RemoveMouseWheelListener(this);
 			}
-			if ((!((_threadController == null)))) {
+			if (!(_threadController == null)) {
 				_threadController.Dispose();
 				// Instead of threadController.stop();
 			}
@@ -57,13 +48,13 @@ namespace nzy3D.Chart.Controllers.Mouse.Camera
 		/// <summary>
 		/// Remove existing threadcontroller (if existing) and add the one passed in parameters as controller.
 		/// </summary>
-		public void addSlaveThreadController(CameraThreadController controller)
+		public void AddSlaveThreadController(CameraThreadController controller)
 		{
-			removeSlaveThreadController();
+			RemoveSlaveThreadController();
 			_threadController = controller;
 		}
 
-		public void removeSlaveThreadController()
+		public void RemoveSlaveThreadController()
 		{
 			if (((_threadController != null))) {
 				_threadController.StopT();
@@ -82,7 +73,8 @@ namespace nzy3D.Chart.Controllers.Mouse.Camera
 		/// </summary>
 		public void MousePressed(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (handleSlaveThread(false)) {
+			if (HandleSlaveThread(false))
+			{
 				return;
 			}
 			_prevMouse.x = e.X;
@@ -95,22 +87,23 @@ namespace nzy3D.Chart.Controllers.Mouse.Camera
 		/// </summary>
 		public void MouseDoubleClicked(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (handleSlaveThread(true)) {
+			if (HandleSlaveThread(true))
+			{
 				return;
 			}
 			_prevMouse.x = e.X;
 			_prevMouse.y = e.Y;
 		}
 
-		public bool handleSlaveThread(bool isDoucleClick)
+		public bool HandleSlaveThread(bool isDoucleClick)
 		{
 			if (isDoucleClick) {
-				if (((_threadController != null))) {
+				if (_threadController != null) {
 					_threadController.Start();
 					return true;
-				}
-			}
-			if (((_threadController != null))) {
+				}	
+			}	
+			if (_threadController != null) {
 				_threadController.StopT();
 			}
 			return false;
@@ -139,34 +132,29 @@ namespace nzy3D.Chart.Controllers.Mouse.Camera
                 if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
 					Coord2d move = mouse.substract(_prevMouse);
-					if (move.y != 0) {
+					if (move.y != 0) 
+					{
 						Shift((float)(move.y / 250));
 					}
-				}
+                }
 				_prevMouse = mouse;
 			}
 		}
 
 		public void MouseWheelMoved(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (((_threadController != null))) {
-				_threadController.StopT();
+            _threadController?.StopT();
+			if (e.Delta > 0)
+			{
+				_prevZoom = 0.9f;
 			}
-			if (e.Delta > 0) {
-				_prevZoomZ = 1.25f;
-			} else {
-				_prevZoomZ = 0.8f;
+			else
+			{
+				_prevZoom = 1.1f;
 			}
-			ZoomZ(_prevZoomZ);
+			ZoomX(_prevZoom); 
+			ZoomY(_prevZoom);
+			ZoomZ(_prevZoom);
 		}
-
 	}
-
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -16,7 +16,7 @@ namespace nzy3D.Plot3D.Builder.Delaunay
 	public class DelaunayTessellator : Tessellator
 	{
 
-		public AbstractComposite build(List<Coord3d> Coordinates)
+		public new AbstractComposite build(List<Coord3d> Coordinates)
 		{
 			return this.build(new Coordinates(Coordinates));
 		}

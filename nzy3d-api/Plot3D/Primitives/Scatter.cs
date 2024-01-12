@@ -85,7 +85,7 @@ namespace nzy3D.Plot3D.Primitives
         private void UpdateBounds() {
             _bbox.reset();
             foreach (var c in _coordinates) {
-                _bbox.add(c);
+                _bbox.Add(c);
             }
             
         }

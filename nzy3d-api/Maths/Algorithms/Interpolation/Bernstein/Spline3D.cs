@@ -175,7 +175,7 @@ namespace nzy3D.Maths.Algorithms.Interpolation.Bernstein
 			for (int i = 0; i <= numP - 2; i++) {
 				Coord3d p = points[i];
 				Coord3d q = points[i + 1];
-				deltaP = delta[i].@add(p);
+				deltaP = delta[i].Add(p);
 				deltaQ = q.substract(delta[i + 1]);
 				for (int k = 0; k <= resolution - 1; k++) {
 					double x = p.x * bernstein.b0[k] + deltaP.x * bernstein.b1[k] + deltaQ.x * bernstein.b2[k] + q.x * bernstein.b3[k];

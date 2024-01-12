@@ -1,18 +1,11 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 namespace nzy3D.Plot3D.Rendering.View.Modes
 {
 
-	/// <summary>
-	/// Allows to apply a restriction on the degree of freedom that is
-	/// let on the View control.
-	/// </summary>
-	public enum ViewPositionMode
+    /// <summary>
+    /// Allows to apply a restriction on the degree of freedom that is
+    /// let on the View control.
+    /// </summary>
+    public enum ViewPositionMode
 	{
 
 		/// <summary>
@@ -31,13 +24,4 @@ namespace nzy3D.Plot3D.Rendering.View.Modes
 		FREE
 
 	}
-
 }
-
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
