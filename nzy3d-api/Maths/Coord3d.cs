@@ -3,7 +3,7 @@ namespace nzy3D.Maths
 {
 
     /// <summary>
-    /// A <see cref="maths.Coord3d"/> stores a 3 dimensional coordinate for cartesian (x, y, y) or
+    /// A <see cref="maths.Coord3d"/> stores a 3 dimensional coordinate for cartesian (x, y, z) or
     /// polar (phi, theta, r) (azimuth, elevation/inclination, radius) mode, and provide operators allowing to add, substract,
     /// multiply and divises coordinate values, as well as computing the distance between
     /// two points, and converting polar and cartesian coordinates.
@@ -11,20 +11,17 @@ namespace nzy3D.Maths
     /// <remarks></remarks>
     public class Coord3d
 	{
-
-		#region "Members"
+		// Members
 		public double x;
 		public double y;
-			#endregion
 		public double z;
 
-		#region "Constants"
+		// Constants
 		public static Coord3d ORIGIN = new Coord3d(0, 0, 0);
 		public static Coord3d INVALID = new Coord3d(double.NaN, double.NaN, double.NaN);
-			#endregion
 		public static Coord3d IDENTITY = new Coord3d(1, 1, 1);
 
-		#region "Constructors"
+		// Constructors
 		public Coord3d() : this(0, 0, 0)
 		{
 		}
@@ -47,10 +44,7 @@ namespace nzy3D.Maths
 			}
 		}
 
-		#endregion
-
-		#region "Functions"
-
+		//Functions
 		/// <summary>
 		/// Returns a memberwise clone of current object.
 		/// </summary>
@@ -98,7 +92,7 @@ namespace nzy3D.Maths
 		/// </summary>
 		/// <param name="value">Value to add to all coordinates (x, y, z)</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord3d @add(double value)
+		public Coord3d Add(double value)
 		{
 			return new Coord3d(this.x + value, this.y + value, this.z + value);
 		}
@@ -111,7 +105,7 @@ namespace nzy3D.Maths
 		/// <param name="yi">y value to add</param>
 		/// <param name="zi">z value to add</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord3d @add(double xi, double yi, double zi)
+		public Coord3d Add(double xi, double yi, double zi)
 		{
 			return new Coord3d(this.x + xi, this.y + yi, this.z + zi);
 		}
@@ -122,7 +116,7 @@ namespace nzy3D.Maths
 		/// </summary>
 		/// <param name="coord">Coordinate with values to add</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord3d @add(Coord3d coord)
+		public Coord3d Add(Coord3d coord)
 		{
 			return new Coord3d(this.x + coord.x, this.y + coord.y, this.z + coord.z);
 		}
@@ -490,18 +484,20 @@ namespace nzy3D.Maths
 
 		public static bool operator ==(Coord3d coord1, Coord3d coord2)
 		{
-			if (coord1 == null & coord2 == null) {
+			if (coord1 == null && coord2 == null) {
 				return true;
 			}
 
-			if (coord1 == null | coord2 == null) {
+			if (coord1 == null || coord2 == null) {
 				return false;
-			} else {
-				if (coord1.Equals(coord2)) {
+			}
+			else
+			{
+				if (coord1.Equals(coord2))
+				{
 					return true;
 				}
-
-				return (coord1.x == coord2.x) & (coord1.y == coord2.y) & (coord1.z == coord2.z);
+				return (coord1.x == coord2.x) && (coord1.y == coord2.y) && (coord1.z == coord2.z);
 			}
 		}
 
@@ -516,17 +512,6 @@ namespace nzy3D.Maths
 			}
 			return !(coord1 == coord2);
 		}
-
-		#endregion
-
 	}
 
 }
-
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

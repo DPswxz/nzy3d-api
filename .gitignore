@@ -4,3 +4,5 @@ bin
 packages
 .idea
 /.vs/nzy3d-api/FileContentIndex
+/nzy3d-api/Maths/Coord3d.cs
+/nzy3d-api/Maths/Coord3d.cs
