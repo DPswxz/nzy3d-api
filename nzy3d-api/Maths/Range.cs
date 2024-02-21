@@ -1,40 +1,35 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 namespace nzy3D.Maths
 {
 
-	public class Range : Scale
-	{
+    public class Range : Scale
+    {
 
-		public Range(double min, double max) : base(min, max)
-		{
-		}
+        public Range(double min, double max) : base(min, max)
+        {
+        }
 
-		public void Enlarge(double ratio)
-		{
-			double offset = (Max - Min) * ratio;
-			if (offset == 0) {
-				offset = 1;
-			}
-			Min -= offset;
-			Max += offset;
-		}
+        public void Enlarge(double ratio)
+        {
+            double offset = (Max - Min) * ratio;
+            if (offset == 0)
+            {
+                offset = 1;
+            }
+            Min -= offset;
+            Max += offset;
+        }
 
-		public Range CreateEnlarge(double ratio)
-		{
-			double offset = (Max - Min) * ratio;
-			if (offset == 0) {
-				offset = 1;
-			}
-			return new Range(Min - offset, Max + offset);
-		}
+        public Range CreateEnlarge(double ratio)
+        {
+            double offset = (Max - Min) * ratio;
+            if (offset == 0)
+            {
+                offset = 1;
+            }
+            return new Range(Min - offset, Max + offset);
+        }
 
-	}
+    }
 
 }
 

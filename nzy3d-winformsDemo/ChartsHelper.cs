@@ -169,17 +169,17 @@ namespace nzy3d_winformsDemo
             // 获取数据
             List<double> timeList = new List<double>();
             PtDB.SelectTime("20240219161004", timeList);
-
+            int interval = timeList.Count / 50;
             //获取吸收值
             List<double> absorbanceList = new List<double>();
 
             List<Coord3d> coords = new List<Coord3d>();
 
-            for (int i = 0; i < timeList.Count(); i = i + 1)
+            for (int i = 0; i < timeList.Count; i = i + interval)
             {
                 absorbanceList.Clear();
                 PtDB.ReadTime("20240219161004", timeList[i].ToString(), absorbanceList);
-                for (int j = 0; j < absorbanceList.Count(); j++)
+                for (int j = 0; j < absorbanceList.Count; j++)
                 {
                     coords.Add(new Coord3d(j + 200, timeList[i], absorbanceList[j]));
                 }
@@ -188,17 +188,18 @@ namespace nzy3d_winformsDemo
             // Create the chart
             Chart chart = new Chart(renderer3D, Quality.Fastest);
             chart.View.Maximized = false;
-            chart.AxeLayout.XAxeLabel = "Wavelength";
-            chart.AxeLayout.YAxeLabel = "Time";
-            chart.AxeLayout.ZAxeLabel = "Absorbance";
+            chart.AxeLayout.XAxeLabel = "Wavelength(nm)";
+            chart.AxeLayout.YAxeLabel = "Time(min)";
+            chart.AxeLayout.ZAxeLabel = "Absorbance(mAu)";
+            
 
             // Create surface
             Shape surface = Builder.BuildDelaunay(coords);
-            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin * 1.05, surface.Bounds.ZMax * 0.95, new Color(1, 1, 1, 0.9));
+            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin * 1.05, surface.Bounds.ZMax * 0.95, new Color(1, 1, 1, 0.8));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = false;
-            surface.WireframeColor = Color.GREEN;
-            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.2));
+            surface.WireframeColor = Color.CYAN;
+            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.5));
 
 
             // Add surface to chart
@@ -340,8 +341,27 @@ namespace nzy3d_winformsDemo
             return chart;
         }
 
-        public static Chart GetScatterGraphFromDB(Renderer3D renderer3D, int size)
+        public static Chart GetScatterGraphFromDB(Renderer3D renderer3D)
         {
+            // 获取数据
+            List<double> timeList = new List<double>();
+            PtDB.SelectTime("20240219161004", timeList);
+
+            //获取吸收值
+            List<double> absorbanceList = new List<double>();
+            List<Coord3d> coords = new List<Coord3d>();
+
+            for (int i = 0; i < timeList.Count(); i = i + 1)
+            {
+                absorbanceList.Clear();
+                PtDB.ReadTime("20240219161004", timeList[i].ToString(), absorbanceList);
+                for (int j = 0; j < absorbanceList.Count(); j++)
+                {
+                    coords.Add(new Coord3d(j + 200, timeList[i], absorbanceList[j]));
+                }
+            }
+
+            int size = timeList.Count * 201;
             // Create data
             var points = new Coord3d[size];
             var colors = new Color[size];
@@ -355,7 +375,7 @@ namespace nzy3d_winformsDemo
                 x = (float)(r.NextDouble() - 0.5f);
                 y = (float)(r.NextDouble() - 0.5f);
                 z = (float)(r.NextDouble() - 0.5f);
-                points[i] = new Coord3d(x, y, z);
+                points[i] = coords[i];
                 colors[i] = new Color(x, y, z, a);
             }
 

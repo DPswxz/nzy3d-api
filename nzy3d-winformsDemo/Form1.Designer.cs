@@ -52,7 +52,6 @@
             this.chkDisplayXTicks.TabIndex = 1;
             this.chkDisplayXTicks.Text = "Display X Ticks";
             this.chkDisplayXTicks.UseVisualStyleBackColor = true;
-            this.chkDisplayXTicks.CheckedChanged += new System.EventHandler(this.checkBoxes_CheckedChanged);
             // 
             // chkDisplayYTicks
             // 
@@ -66,7 +65,6 @@
             this.chkDisplayYTicks.TabIndex = 2;
             this.chkDisplayYTicks.Text = "Display Y Ticks";
             this.chkDisplayYTicks.UseVisualStyleBackColor = true;
-            this.chkDisplayYTicks.CheckedChanged += new System.EventHandler(this.checkBoxes_CheckedChanged);
             // 
             // chkDisplayZTick
             // 
@@ -80,7 +78,6 @@
             this.chkDisplayZTick.TabIndex = 3;
             this.chkDisplayZTick.Text = "Display Z Ticks";
             this.chkDisplayZTick.UseVisualStyleBackColor = true;
-            this.chkDisplayZTick.CheckedChanged += new System.EventHandler(this.checkBoxes_CheckedChanged);
             // 
             // chkDisplayZAxisLabel
             // 
@@ -94,7 +91,6 @@
             this.chkDisplayZAxisLabel.TabIndex = 6;
             this.chkDisplayZAxisLabel.Text = "Display Z axis label";
             this.chkDisplayZAxisLabel.UseVisualStyleBackColor = true;
-            this.chkDisplayZAxisLabel.CheckedChanged += new System.EventHandler(this.checkBoxes_CheckedChanged);
             // 
             // chkDisplayYAxisLabel
             // 
@@ -108,7 +104,6 @@
             this.chkDisplayYAxisLabel.TabIndex = 5;
             this.chkDisplayYAxisLabel.Text = "Display Y axis label";
             this.chkDisplayYAxisLabel.UseVisualStyleBackColor = true;
-            this.chkDisplayYAxisLabel.CheckedChanged += new System.EventHandler(this.checkBoxes_CheckedChanged);
             // 
             // chkDisplayXAxisLabel
             // 
@@ -122,7 +117,6 @@
             this.chkDisplayXAxisLabel.TabIndex = 4;
             this.chkDisplayXAxisLabel.Text = "Display X axis label";
             this.chkDisplayXAxisLabel.UseVisualStyleBackColor = true;
-            this.chkDisplayXAxisLabel.CheckedChanged += new System.EventHandler(this.checkBoxes_CheckedChanged);
             // 
             // chkDisplayTickLines
             // 
@@ -136,7 +130,6 @@
             this.chkDisplayTickLines.TabIndex = 7;
             this.chkDisplayTickLines.Text = "Display tick lines";
             this.chkDisplayTickLines.UseVisualStyleBackColor = true;
-            this.chkDisplayTickLines.CheckedChanged += new System.EventHandler(this.checkBoxes_CheckedChanged);
             // 
             // myRenderer3D
             // 

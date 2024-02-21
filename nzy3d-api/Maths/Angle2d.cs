@@ -15,16 +15,15 @@ namespace nzy3D.Maths
 	public class Angle2d
 	{
 
-		#region "Members"
+		//Members
 		private double x1;
 		private double x2;
 		private double x3;
 		private double y1;
 		private double y2;
-			#endregion
 		private double y3;
 
-		#region "Constructors"
+		//Constructors
 
 		public Angle2d(double x1, double x2, double x3, double y1, double y2, double y3)
 		{
@@ -40,10 +39,9 @@ namespace nzy3D.Maths
 		{
 		}
 
-		#endregion
 
-		#region "Functions"
 
+		//Functions
 		/// <summary>
 		/// Computes the sinus of the angle
 		/// </summary>
@@ -79,14 +77,5 @@ namespace nzy3D.Maths
 			Vector2d v3 = new Vector2d(x3, y3, x2, y2);
 			return Math.Acos(v1.dot(v3));
 		}
-
-		#endregion
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

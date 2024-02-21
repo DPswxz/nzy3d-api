@@ -15,7 +15,7 @@ namespace nzy3D.Maths
 	public class Angle3d
 	{
 
-		#region "Members"
+		//Members
 		private double x1;
 		private double x2;
 		private double x3;
@@ -24,11 +24,9 @@ namespace nzy3D.Maths
 		private double y3;
 		private double z1;
 		private double z2;
-			#endregion
 		private double z3;
 
-		#region "Constructors"
-
+		//Constructors
 		public Angle3d(double x1, double x2, double x3, double y1, double y2, double y3, double z1, double z2, double z3)
 		{
 			this.x1 = x1;
@@ -50,10 +48,8 @@ namespace nzy3D.Maths
 		{
 		}
 
-		#endregion
 
-		#region "Functions"
-
+		//Functions
 		/// <summary>
 		/// Computes the sinus of the angle
 		/// </summary>
@@ -89,14 +85,5 @@ namespace nzy3D.Maths
 				return Math.PI * 2 - Math.Acos(cos());
 			}
 		}
-
-		#endregion
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
