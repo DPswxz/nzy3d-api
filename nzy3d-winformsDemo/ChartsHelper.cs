@@ -108,14 +108,14 @@ namespace nzy3d_winformsDemo
             return chart;
         }
 
-        public static Chart GetScanDate(Renderer3D renderer3D)
+        public static Chart GetScanDateFromCSV(Renderer3D renderer3D)
         {
             // Generate data
             TickLabelMap labels = new TickLabelMap();
             List<Coord3d> coords = new List<Coord3d>();
             bool isHeader = true;
             string[] header;
-            foreach (var line in File.ReadAllLines(@"C:\Users\汪新智\Desktop\2024-01-09-14.csv"))
+            foreach (var line in File.ReadAllLines(@"C:\Users\汪新智\Desktop\2024-02-20-11.csv"))
             {
                 var data = line.Split('\u002C');
                 if (isHeader)
@@ -141,11 +141,12 @@ namespace nzy3d_winformsDemo
             // Create the chart
             Chart chart = new Chart(renderer3D, Quality.Intermediate);
             chart.View.Maximized = false;
+            //chart.ViewMode = ViewPositionMode.TOP;
             //chart.View.CameraMode = CameraMode.ORTHOGONAL;
-            //chart.AxeLayout.YTickRenderer = new DateTickRenderer("dd/MM/yyyy");
-            chart.AxeLayout.YAxeLabel = "Time";
             //chart.AxeLayout.XTickRenderer = labels;
+            //chart.AxeLayout.YTickRenderer = new DateTickRenderer("dd/MM/yyyy");
             chart.AxeLayout.XAxeLabel = "Wavelength";
+            chart.AxeLayout.YAxeLabel = "Time";
             chart.AxeLayout.ZAxeLabel = "Absorbance";
 
             // Create surface
@@ -156,6 +157,49 @@ namespace nzy3d_winformsDemo
             surface.WireframeColor = Color.GREEN;
             surface.WireframeColor.Mul(new Color(1, 1, 1, 0.2));
             
+
+            // Add surface to chart
+            chart.Scene.Graph.Add(surface);
+
+            return chart;
+        }
+
+        public static Chart GetScanDateFromDB(Renderer3D renderer3D)
+        {
+            // 获取数据
+            List<double> timeList = new List<double>();
+            PtDB.SelectTime("20240219161004", timeList);
+
+            //获取吸收值
+            List<double> absorbanceList = new List<double>();
+
+            List<Coord3d> coords = new List<Coord3d>();
+
+            for (int i = 0; i < timeList.Count(); i = i + 1)
+            {
+                absorbanceList.Clear();
+                PtDB.ReadTime("20240219161004", timeList[i].ToString(), absorbanceList);
+                for (int j = 0; j < absorbanceList.Count(); j++)
+                {
+                    coords.Add(new Coord3d(j + 200, timeList[i], absorbanceList[j]));
+                }
+            }
+
+            // Create the chart
+            Chart chart = new Chart(renderer3D, Quality.Fastest);
+            chart.View.Maximized = false;
+            chart.AxeLayout.XAxeLabel = "Wavelength";
+            chart.AxeLayout.YAxeLabel = "Time";
+            chart.AxeLayout.ZAxeLabel = "Absorbance";
+
+            // Create surface
+            Shape surface = Builder.BuildDelaunay(coords);
+            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin * 1.05, surface.Bounds.ZMax * 0.95, new Color(1, 1, 1, 0.9));
+            surface.FaceDisplayed = true;
+            surface.WireframeDisplayed = false;
+            surface.WireframeColor = Color.GREEN;
+            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.2));
+
 
             // Add surface to chart
             chart.Scene.Graph.Add(surface);
@@ -181,7 +225,6 @@ namespace nzy3d_winformsDemo
             coords = coords.OrderBy(p => p.x).ThenBy(p => p.y).ThenBy(p => p.z).ToList();
 
             // Create chart
-            BoundingBox3d clippingBox = new BoundingBox3d(-0.2, 0.2, -0.2, 0.2, -0.2, 0.2);
             Chart chart = new Chart(renderer3D, Quality.Nicest);
             chart.View.Maximized = false;
             
@@ -287,7 +330,38 @@ namespace nzy3d_winformsDemo
             // Create chart
             Chart chart = new Chart(renderer3D, Quality.Nicest);
             chart.View.Maximized = false;
-            chart.View.CameraMode = CameraMode.PERSPECTIVE;
+
+            // Create scatter
+            var scatter = new Scatter(points, colors);
+
+            // Add surface to chart
+            chart.Scene.Graph.Add(scatter);
+
+            return chart;
+        }
+
+        public static Chart GetScatterGraphFromDB(Renderer3D renderer3D, int size)
+        {
+            // Create data
+            var points = new Coord3d[size];
+            var colors = new Color[size];
+
+            float x, y, z;
+            const float a = 0.25f;
+
+            var r = new Random(0);
+            for (int i = 0; i < size; i++)
+            {
+                x = (float)(r.NextDouble() - 0.5f);
+                y = (float)(r.NextDouble() - 0.5f);
+                z = (float)(r.NextDouble() - 0.5f);
+                points[i] = new Coord3d(x, y, z);
+                colors[i] = new Color(x, y, z, a);
+            }
+
+            // Create chart
+            Chart chart = new Chart(renderer3D, Quality.Nicest);
+            chart.View.Maximized = false;
 
             // Create scatter
             var scatter = new Scatter(points, colors);

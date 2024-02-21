@@ -129,21 +129,22 @@ namespace nzy3D.Chart.Controllers.Mouse.Camera
 					Coord2d move = mouse.substract(_prevMouse).divide(100);
 					Rotate(move);
 				}
-                if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                {
-					Coord2d move = mouse.substract(_prevMouse);
-					if (move.y != 0) 
-					{
-						Shift((float)(move.y / 250));
-					}
-                }
+				////z-shift
+				//if (e.Button == System.Windows.Forms.MouseButtons.Right)
+				//{
+				//	Coord2d move = mouse.substract(_prevMouse);
+				//	if (move.y != 0)
+				//	{
+				//		Shift((float)(move.y / 250));
+				//	}
+				//}
 				_prevMouse = mouse;
 			}
 		}
 
 		public void MouseWheelMoved(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-            _threadController?.StopT();
+			_threadController?.StopT();
 			if (e.Delta > 0)
 			{
 				_prevZoom = 0.9f;
@@ -152,7 +153,7 @@ namespace nzy3D.Chart.Controllers.Mouse.Camera
 			{
 				_prevZoom = 1.1f;
 			}
-			ZoomX(_prevZoom); 
+			ZoomX(_prevZoom);
 			ZoomY(_prevZoom);
 			ZoomZ(_prevZoom);
 		}
