@@ -369,12 +369,12 @@ namespace nzy3D.Maths
                 return double.NaN;
             }
             double[] dists = new double[values.Length];
-            double median = Statistics.Median(values, true);
+            double median = Median(values, true);
             for (int i = 0; i <= values.Length - 1; i++)
             {
                 dists[i] = Math.Abs(values[i] - median);
             }
-            return Statistics.Median(dists, true);
+            return Median(dists, true);
         }
 
 
@@ -389,7 +389,7 @@ namespace nzy3D.Maths
             {
                 return double.NaN;
             }
-            return Math.Sqrt(Statistics.Variance(values));
+            return Math.Sqrt(Variance(values));
         }
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace nzy3D.Maths
             {
                 return double.NaN;
             }
-            double mean = Statistics.Mean(values);
+            double mean = Mean(values);
             double sum = 0;
             int count = 0;
             for (int i = 0; i <= values.Length - 1; i++)
@@ -496,7 +496,7 @@ namespace nzy3D.Maths
         /// <param name="values">Input array</param>
         /// <param name="levels">A list of levels that must belong to [0;100]</param>
         /// <returns>The quantiles</returns>
-        /// <remarks>This is only a helper function for Statistics.Quantile(values, levels, True). Throws an IllegalArgumentException if a level is out of the [0;100] bounds. Return 0 if input array is empty.</remarks>
+        /// <remarks>This is only a helper function for Quantile(values, levels, True). Throws an IllegalArgumentException if a level is out of the [0;100] bounds. Return 0 if input array is empty.</remarks>
         public static double[] Quantile(double[] values, double[] levels)
         {
             return Quantile(values, levels, true);

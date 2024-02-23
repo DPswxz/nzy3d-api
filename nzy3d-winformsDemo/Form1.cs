@@ -34,7 +34,7 @@ namespace nzy3d_winformsDemo
             // mainPanel.Controls.Clear();
             //mainPanel.Controls.Add(myRenderer3D);
 
-            Chart chart = ChartsHelper.GetScanDateFromDB(myRenderer3D);
+            Chart chart = ChartsHelper.NullChart(myRenderer3D);
 
             axeLayout = chart.AxeLayout;
 
@@ -61,7 +61,7 @@ namespace nzy3d_winformsDemo
 
         private void DisposeBackgroundThread()
         {
-            if ((cameraController != null))
+            if (cameraController != null)
             {
                 cameraController.Dispose();
             }

@@ -7,7 +7,6 @@ using nzy3D.Plot3D.Builder.Concrete;
 using nzy3D.Plot3D.Primitives;
 using nzy3D.Plot3D.Primitives.Axes.Layout.Renderers;
 using nzy3D.Plot3D.Rendering.Canvas;
-using nzy3D.Plot3D.Rendering.Legends;
 using nzy3D.Plot3D.Rendering.View;
 using nzy3D.Plot3D.Rendering.View.Modes;
 using nzy3d_wpfDemo;
@@ -156,7 +155,7 @@ namespace nzy3d_winformsDemo
             surface.WireframeDisplayed = false;
             surface.WireframeColor = Color.GREEN;
             surface.WireframeColor.Mul(new Color(1, 1, 1, 0.2));
-            
+
 
             // Add surface to chart
             chart.Scene.Graph.Add(surface);
@@ -191,7 +190,7 @@ namespace nzy3d_winformsDemo
             chart.AxeLayout.XAxeLabel = "Wavelength(nm)";
             chart.AxeLayout.YAxeLabel = "Time(min)";
             chart.AxeLayout.ZAxeLabel = "Absorbance(mAu)";
-            
+
 
             // Create surface
             Shape surface = Builder.BuildDelaunay(coords);
@@ -228,7 +227,7 @@ namespace nzy3d_winformsDemo
             // Create chart
             Chart chart = new Chart(renderer3D, Quality.Nicest);
             chart.View.Maximized = false;
-            
+
             //chart.View.CameraMode = CameraMode.PERSPECTIVE;
 
             // Create surface
@@ -241,6 +240,32 @@ namespace nzy3d_winformsDemo
             // Add surface to chart     
             chart.Scene.Graph.Add(surface);
 
+            return chart;
+        }
+
+        public static Chart NullChart(Renderer3D renderer3D)
+        {
+            List<Coord3d> coords = new List<Coord3d>()
+            {
+                new Coord3d(1, 0, 0),
+                new Coord3d(0, 1, 0),
+                new Coord3d(0, 0, 1)
+            };
+            // Create chart
+            Chart chart = new Chart(renderer3D, Quality.Nicest);
+            chart.View.Maximized = true;
+            chart.AxeLayout.XAxeLabel = "Wavelength(nm)";
+            chart.AxeLayout.YAxeLabel = "Time(min)";
+            chart.AxeLayout.ZAxeLabel = "Absorbance(mAu)";
+
+            Shape surface = Builder.BuildDelaunay(coords);
+            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.8));
+            surface.FaceDisplayed = true;
+            surface.WireframeDisplayed = true;
+            surface.WireframeColor = Color.CYAN;
+            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.5));
+            // Add surface to chart     
+            chart.Scene.Graph.Add(surface);
             return chart;
         }
 

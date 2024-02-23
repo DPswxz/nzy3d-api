@@ -14,7 +14,7 @@ namespace nzy3D.Plot3D.Builder.Concrete
         {
         }
 
-        public override System.Collections.Generic.List<Maths.Coord3d> Apply(Mapper mapper)
+        public override List<Coord3d> Apply(Mapper mapper)
         {
             double xstep = xrange.Range / (xsteps - 1);
             double ystep = yrange.Range / (ysteps - 1);
@@ -35,10 +35,3 @@ namespace nzy3D.Plot3D.Builder.Concrete
 
     }
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -58,27 +58,27 @@ namespace nzy3D.Plot3D.Primitives.Axes
             GL.End();
         }
 
-        public Maths.BoundingBox3d getBoxBounds()
+        public BoundingBox3d getBoxBounds()
         {
             return _bbox;
         }
 
-        public Maths.Coord3d getCenter()
+        public Coord3d getCenter()
         {
             return new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMin);
         }
 
-        public Layout.IAxeLayout getLayout()
+        public IAxeLayout getLayout()
         {
             return _layout;
         }
 
-        public void setAxe(Maths.BoundingBox3d box)
+        public void setAxe(BoundingBox3d box)
         {
             _bbox = box;
         }
 
-        public void setScale(Maths.Coord3d scale)
+        public void setScale(Coord3d scale)
         {
             _scale = scale;
         }
