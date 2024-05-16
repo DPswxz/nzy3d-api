@@ -7,6 +7,7 @@ using nzy3D.Plot3D.Builder.Concrete;
 using nzy3D.Plot3D.Primitives;
 using nzy3D.Plot3D.Primitives.Axes.Layout.Renderers;
 using nzy3D.Plot3D.Rendering.Canvas;
+using nzy3D.Plot3D.Rendering.Legends.Colorbars;
 using nzy3D.Plot3D.Rendering.View;
 using nzy3D.Plot3D.Rendering.View.Modes;
 using nzy3d_wpfDemo;
@@ -168,7 +169,7 @@ namespace nzy3d_winformsDemo
             // 获取数据
             List<double> timeList = new List<double>();
             PtDB.SelectTime("20240219161004", timeList);
-            int interval = timeList.Count / 50;
+            int interval = (int)Math.Ceiling((double)timeList.Count / 40);
             //获取吸收值
             List<double> absorbanceList = new List<double>();
 
@@ -178,7 +179,7 @@ namespace nzy3d_winformsDemo
             {
                 absorbanceList.Clear();
                 PtDB.ReadTime("20240219161004", timeList[i].ToString(), absorbanceList);
-                for (int j = 0; j < absorbanceList.Count; j++)
+                for (int j = 0; j < absorbanceList.Count; j = j + 2)
                 {
                     coords.Add(new Coord3d(j + 200, timeList[i], absorbanceList[j]));
                 }
@@ -190,6 +191,7 @@ namespace nzy3d_winformsDemo
             chart.AxeLayout.XAxeLabel = "Wavelength(nm)";
             chart.AxeLayout.YAxeLabel = "Time(min)";
             chart.AxeLayout.ZAxeLabel = "Absorbance(mAu)";
+            
 
 
             // Create surface
@@ -199,8 +201,9 @@ namespace nzy3d_winformsDemo
             surface.WireframeDisplayed = false;
             surface.WireframeColor = Color.CYAN;
             surface.WireframeColor.Mul(new Color(1, 1, 1, 0.5));
-
-
+            surface.Legend = new ColorbarLegend(surface, chart.View.Axe.getLayout());
+            surface.LegendDisplayed = true;
+                                 
             // Add surface to chart
             chart.Scene.Graph.Add(surface);
 

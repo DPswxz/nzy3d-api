@@ -1,7 +1,9 @@
 ﻿using nzy3D.Chart;
 using nzy3D.Chart.Controllers.Mouse.Camera;
 using nzy3D.Chart.Controllers.Thread.Camera;
+using nzy3D.Maths;
 using nzy3D.Plot3D.Primitives.Axes.Layout;
+using nzy3D.Plot3D.Rendering.View;
 using System;
 using System.Windows.Forms;
 
@@ -34,7 +36,7 @@ namespace nzy3d_winformsDemo
             // mainPanel.Controls.Clear();
             //mainPanel.Controls.Add(myRenderer3D);
 
-            Chart chart = ChartsHelper.NullChart(myRenderer3D);
+            Chart chart = ChartsHelper.GetScanDateFromDB(myRenderer3D);
 
             axeLayout = chart.AxeLayout;
 
