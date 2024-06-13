@@ -129,15 +129,15 @@ namespace nzy3D.Chart.Controllers.Mouse.Camera
 					Coord2d move = mouse.substract(_prevMouse).divide(100);
 					Rotate(move);
 				}
-				////z-shift
-				//if (e.Button == System.Windows.Forms.MouseButtons.Right)
-				//{
-				//	Coord2d move = mouse.substract(_prevMouse);
-				//	if (move.y != 0)
-				//	{
-				//		Shift((float)(move.y / 250));
-				//	}
-				//}
+				//z-shift
+				if (e.Button == System.Windows.Forms.MouseButtons.Right)
+				{
+					Coord2d move = mouse.substract(_prevMouse);
+					if (move.y != 0)
+					{
+						Shift((float)(move.y / 250));
+					}
+				}
 				_prevMouse = mouse;
 			}
 		}
